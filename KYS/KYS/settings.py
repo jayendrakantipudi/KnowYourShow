@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'show',
+    'cast',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +79,11 @@ WSGI_APPLICATION = 'KYS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'mydb',
+        # 'USER': 'root',
+        # 'PASSWORD': 'kkchinna5',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '',
     }
 }
 
