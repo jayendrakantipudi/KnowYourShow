@@ -1,0 +1,24 @@
+{% extends "homePage.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container" style="color:white;">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{show.titleName}}</h1>
+    </div>
+<hr>
+  </div>
+  <div class="row">
+    <div class="col-md-2"><img src="{{ show.titlePoster.url }}"></div>
+    <div class="col-md-4">
+      <b style="color:#FFD700;">Release Date</b> :   {{show.releaseDate}}<br>
+      <b style="color:#FFD700;">Story Line</b> : {{show.storyLine}}<br>
+      <b style="color:#FFD700;">Budget</b> : Rs. {{show.budget}}<br>
+      <b style="color:#FFD700;">Collection</b> :Rs. {{show.BoxOfficeCollection}}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -12,7 +12,7 @@ class language(models.Model):
 class GENRE(models.Model):
 	genres = models.CharField(max_length=25)
 	def __str__(self):
-		return self.genres	
+		return self.genres
 
 
 class review(models.Model):
@@ -22,14 +22,14 @@ class review(models.Model):
 
 class Show(models.Model):
 	titleName = models.CharField(max_length=120)
-	releaseDate = models.DateTimeField()
-	languages = models.ManyToManyField(language)
+	releaseDate = models.DateField()
+	language = models.ManyToManyField(language)
 	storyLine = models.CharField(max_length=1000)
 	budget = models.FloatField(null=True)
 	BoxOfficeCollection = models.FloatField(null=True)
-	genre = models.ManyToManyField(GENRE)
-	titlePoster = models.ImageField(null=True, blank=True)
-	actors = models.ManyToManyField(cast)
-	Review = models.ForeignKey(review, on_delete=models.SET_NULL, null=True)
+	GENRE = models.ManyToManyField(GENRE)
+	titlePoster = models.ImageField(upload_to='movie_posters',blank=True)
+	cast = models.ManyToManyField(cast)
+	review = models.ForeignKey(review, on_delete=models.SET_NULL,blank=True ,null=True)
 	def __str__(self):
 		return self.titleName
