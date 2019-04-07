@@ -21,7 +21,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.search,name='search'),
-    path('insertForms/',include('show.urls')),
+    path('',include('show.urls')),
+    path('',include('cast.urls')),
 ]
 
 if settings.DEBUG:

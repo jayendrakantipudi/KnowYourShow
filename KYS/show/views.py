@@ -49,20 +49,34 @@ def movie(request,id):
 
                 for i in all_shows_with_query:
                     print(i)
-    movies = language.objects.raw('''
+    movies = Show.objects.raw('''
         SELECT * FROM show_show
+        WHERE id=%s
         ;
-    ''')
+    ''',[id,])
     # print(movies[0].titleName)
     form = search_bar()
+    year = movies[0].releaseDate.year
+    castActed = Show.objects.raw('''
+        SELECT * FROM show_show_cast
+        WHERE show_id=%s
+        ;
+    ''',[id])
+    castCrew= []
+    for i in castActed:
+        temp_cast = cast.objects.raw('''
+            SELECT * FROM cast_cast
+            WHERE id=%s;
+        ''',[i.cast_id])
+        castCrew.append(temp_cast[0])
     print()
     print()
-    for i in movies:
-        print(i.titleName)
-        print(i.titlePoster)
+    for i in castCrew:
+        print(i.name)
+        print()
         print()
     print()
-    return render(request,'show/movie.html',{'show':movies[3],'search_form':form})
+    return render(request,'show/movie.html',{'show':movies[0],'search_form':form,'cast':castCrew,'Year':year})
 
 def language_form(request):
     if request.method == 'POST':

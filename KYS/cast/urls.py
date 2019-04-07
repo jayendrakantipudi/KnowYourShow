@@ -5,11 +5,9 @@ from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 
-app_name = 'show'
+app_name = 'cast'
 urlpatterns = [
-    path("language",views.language_form),
-    path("genre",views.genre_form),
-    path("movie/<id>/",views.movie,name='movie'),
+    path("cast/<id>/",views.Cast,name='CAST'),
 ]
 
 

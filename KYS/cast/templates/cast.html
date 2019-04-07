@@ -1,0 +1,39 @@
+{% extends "homePage.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block content %}
+<br><br>
+<div class="container" style="color:white;">
+  <div class="row">
+    <div class="col-md-10 heading">
+      <h1>{{Cast.name}}</h1>
+    </div>
+<hr>
+  </div>
+  <div class="row">
+    <div class="col-md-6"><img src="{{ show.titlePoster }}"></div>
+    <div class="col-md-4">
+      <b style="color:#FFD700;">Age</b> :   {{Cast.age}}<br><br>
+      <b style="color:#FFD700;">Biography</b> : {{Cast.biography}}<br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 heading">
+      <h3>Movies Acted In</h3>
+    </div>
+  </div>
+  <div class="row">
+    {% for movie in moviesActed %}
+    <div class="col-md-2 movie_acted">
+      <a href="{% url 'show:movie' movie.id %}">{{movie.titleName}}</a>
+    </div>
+    {% endfor %}
+  </div><br><br>
+  <div class="row">
+    <div class="col-md-10 heading">
+      <h3>Personal Information</h3>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

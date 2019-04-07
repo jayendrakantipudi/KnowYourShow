@@ -23,6 +23,8 @@ class review(models.Model):
 class Show(models.Model):
 	titleName = models.CharField(max_length=120)
 	releaseDate = models.DateField()
+	director = models.CharField(max_length=120)
+	producer = models.CharField(max_length=120)
 	language = models.ManyToManyField(language)
 	storyLine = models.CharField(max_length=1000)
 	budget = models.FloatField(null=True)
