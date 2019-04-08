@@ -1,0 +1,14 @@
+body{
+  background-color: black;
+  border : 1px solid white;
+}
+
+hr{
+  height: 1px;
+  color: white;
+  background-color: white;
+  border: none;
+}
+.container{
+  background-color: white;
+}

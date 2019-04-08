@@ -1,0 +1,41 @@
+{% extends "show/base_show.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<br><br>
+<div class="container" style="color:white;">
+  <div class="row">
+    <div class="col-md-10 heading">
+      <h1>{{show.titleName}}&nbsp({{Year}})</h1>
+    </div>
+<hr>
+  </div>
+  <div class="row">
+    <div class="col-md-6"><img src=""></div>
+    <div class="col-md-4">
+      <b style="color:#FFD700;">Release Date</b> :   {{show.releaseDate}}<br>
+      <b style="color:#FFD700;">Budget</b> : Rs. {{show.budget}}<br>
+      <b style="color:#FFD700;">Collection</b> :Rs. {{show.BoxOfficeCollection}}<br>
+      <b style="color:#FFD700;">Languages</b> :   {{show.releaseDate}}<br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+      <b style="color:#FFD700;">Story Line</b> : {{show.storyLine}}
+    </div>
+  </div><br><br><br>
+  <div class="row">
+    <div class="col-md-10 heading">
+      <h3>Cast & Crew</h3>
+    </div>
+  </div>
+  <div class="row">
+    {% for cast in cast %}
+    <div class="col-md-2 cast">
+      <a href="{% url 'cast:CAST' cast.id %}">{{cast.name}}</a>
+    </div>
+    {% endfor %}
+  </div><br><br>
+</div>
+
+{% endblock content %}
