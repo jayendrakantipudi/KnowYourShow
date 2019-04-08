@@ -76,6 +76,10 @@ def movie(request,id):
         print()
         print()
     print()
+    movies = language.objects.raw('''
+                select * from show_show
+                 where id = %s;
+            ''',[id])
     return render(request,'show/movie.html',{'show':movies[0],'search_form':form,'cast':castCrew,'Year':year})
 
 def language_form(request):
