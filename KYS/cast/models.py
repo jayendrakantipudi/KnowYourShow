@@ -13,6 +13,8 @@ class cast(models.Model):
 	gender = models.CharField(max_length=15, choices=GENDER)
 	biography = models.CharField(max_length=1000)
 	photo = models.ImageField(null=True, blank=True)
+	maritalStatus = models.CharField(max_length=120)
+	origin = models.CharField(max_length=100)
 
 	def __str__(self):
 		return self.name
