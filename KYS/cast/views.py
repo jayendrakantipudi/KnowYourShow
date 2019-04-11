@@ -54,24 +54,19 @@ def Cast(request,id):
         ;
     ''',[id,])
     castActedMovies = Show.objects.raw('''
-        SELECT 3 as id,show_id FROM show_show_cast WHERE cast_id = %s;
+        SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
+        WHERE id in (SELECT show_id FROM show_show_cast WHERE cast_id=%s)
+        ORDER BY releaseDate DESC;
     ''',[id])
-    # print()
-    # print()
-    # for i in castActedMovies:
-    #     print(i.show_id)
-    # print()
-    # print()
-    moviesActed = []
-    for i in castActedMovies:
-        temp_movie = Show.objects.raw('''
-            SELECT * FROM show_show
-            WHERE id=%s;
-        ''',[i.show_id])
-        moviesActed.append(temp_movie[0])
-    for i in moviesActed:
-        print(i.titleName)
-        print(i.releaseDate)
-
+    castProfession = cast.objects.raw('''
+        SELECT * FROM cast_profession
+        where id in (select profession_id from cast_cast_profession where cast_id=%s);
+    ''',[id])
     form = search_bar()
-    return render(request,'cast.html',{'Cast':actor[0],'search_form':form,'moviesActed':moviesActed})
+    context = {
+        'Cast':actor[0],
+        'search_form':form,
+        'moviesActed':castActedMovies,
+        'castProfession':castProfession,
+    }
+    return render(request,'cast.html',context)

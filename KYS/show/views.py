@@ -50,33 +50,47 @@ def movie(request,id):
                 for i in all_shows_with_query:
                     print(i)
     movies = Show.objects.raw('''
-        SELECT * FROM show_show
+        SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
         WHERE id=%s
         ;
     ''',[id,])
-    # print(movies[0].titleName)
+
     form = search_bar()
-    year = movies[0].releaseDate.year
     castActed = Show.objects.raw('''
-        SELECT * FROM show_show_cast
-        WHERE show_id=%s
+        SELECT * FROM cast_cast
+        WHERE id in (SELECT cast_id FROM show_show_cast WHERE show_id=%s);
         ;
     ''',[id])
-    castCrew= []
-    for i in castActed:
-        temp_cast = cast.objects.raw('''
-            SELECT * FROM cast_cast
-            WHERE id=%s;
-        ''',[i.cast_id])
-        castCrew.append(temp_cast[0])
-    print()
-    print()
-    for i in castCrew:
-        print(i.name)
-        print()
-        print()
-    print()
-    return render(request,'show/movie.html',{'show':movies[0],'search_form':form,'cast':castCrew,'Year':year})
+    langs = Show.objects.raw('''
+        SELECT * FROM show_language
+        WHERE id in (SELECT language_id FROM show_show_language WHERE show_id=%s);
+        ;
+    ''',[id])
+    genres = Show.objects.raw('''
+        SELECT * FROM show_GENRE
+        WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
+        ;
+    ''',[id])
+    director = cast.objects.raw('''
+        SELECT * FROM cast_director
+        WHERE id in (SELECT  director_id FROM show_show_director WHERE show_id=%s);
+        ;
+    ''',[id])
+    producer = cast.objects.raw('''
+        SELECT * FROM cast_producer
+        WHERE id in (SELECT  producer_id FROM show_show_producer WHERE show_id=%s);
+        ;
+    ''',[id])
+    context = {
+        'show':movies[0],
+        'search_form':form,
+        'cast':castActed,
+        'Genres' : genres,
+        'Languages':langs,
+        'Directors' : director,
+        'Producers' : producer,
+    }
+    return render(request,'show/movie.html',context)
 
 def language_form(request):
     if request.method == 'POST':
