@@ -28,7 +28,7 @@ class Show(models.Model):
 	budget = models.FloatField(null=True)
 	BoxOfficeCollection = models.FloatField(null=True)
 	GENRE = models.ManyToManyField(GENRE)
-	titlePoster = models.ImageField(upload_to='movie_posters',blank=True)
+	titlePoster = models.ImageField(upload_to='movie_posters',null=True, blank=True)
 	cast = models.ManyToManyField(cast)
 	review = models.ForeignKey(review, on_delete=models.SET_NULL,blank=True ,null=True)
 	def __str__(self):

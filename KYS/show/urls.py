@@ -9,7 +9,7 @@ app_name = 'show'
 urlpatterns = [
     path("language",views.language_form),
     path("genre",views.genre_form),
-    path("movie/<id>/",views.movie,name='movieID'),
+    path("movie/<int:id>/",views.movie,name='movieID'),
 ]
 
 
