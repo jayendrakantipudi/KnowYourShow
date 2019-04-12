@@ -47,11 +47,15 @@ def search(request):
                 for i in all_shows_with_query:
                     print(i)
 
-            # all
-            # for i in all_shows_with_query1:
-            #     #for k in i:
-            #     print('all shows containing',search_query,' in the storyline ',i)
+    movies = Show.objects.raw('''
+        SELECT * FROM show_show;
+    ''')
+    movies_telugu = Show.objects.raw('''
+        SELECT * FROM show_show
+        WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages="Telugu"));
+        ;
+    ''')
 
     form = search_bar()
 
-    return render(request,'homePage.html',{'search_form':form})
+    return render(request,'KYS/homePage.html',{'search_form':form,'movies':movies,'movies_telugu':movies_telugu})
