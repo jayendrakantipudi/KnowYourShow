@@ -18,7 +18,9 @@
           {% for profession in castProfession %}
           <li>{{profession.name}}</li>
           {% endfor %}
-        </ul>
+        </ul><br>
+        <b style="color:#FFD700;">Age </b> : {{Cast.age}}<br><br>
+        <b style="color:#FFD700;">Started Movies From </b> : {{yearStarted}}
     </div>
   </div><br><br>
   <div class="row">
@@ -48,5 +50,5 @@
     </div>
   </div>
 </div>
-
+<br><br>
 {% endblock content %}

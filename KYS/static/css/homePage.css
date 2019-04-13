@@ -12,6 +12,23 @@ body{
   text-decoration: none;
 }
 
+.button {
+  background-color:  #ffc119;
+  border: none;
+  color: black;
+  padding: 9px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px 0.5px;
+  cursor: pointer;
+}
+
+.button_log{
+  margin-left:100px;
+}
+
 .field_name{
   color:white;
 }
@@ -54,4 +71,38 @@ body{
   .create_acc_login:hover{
     color: #FFD700;
     text-decoration: none;
+  }
+
+  #image{
+    width:90%;
+    height:120px;
+    margin-bottom:0px;
+  }
+  .navbar-nav > li{
+    padding-left:30px;
+    padding-right:30px;
+  }
+
+
+  #id_search_query,#id_search_ty{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  #searchb{
+    /* padding-left:20px; */
+    margin-left: 10px;
+    background-color:#ffc119;
+    color:black;
+  }
+  #id_search_ty{
+    /* border-radius:5px; */
+    background: #ffc119;
+  }
+  #id_search_ty > option{
+    background-color: white;
+    font-size: 20px;
+    background: #ffc119;
+  }
+  #searchb2{
+    margin-left:100px;
   }
