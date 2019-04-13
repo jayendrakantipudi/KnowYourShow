@@ -13,8 +13,14 @@
   <div class="row">
     <div class="col-md-6"><img src="/media/{{show.titlePoster}}" width="500px" height="300px"></div>
     <div class="col-md-4">
-      <b style="color:#FFD700;">Directed By</b> : {% for director in Directors %} {{director.name}} &nbsp {% endfor %}<br>
-      <b style="color:#FFD700;">Produced By</b> : {% for producer in Producers %} {{producer.name}} &nbsp {% endfor %}  <br>
+      <b style="color:#FFD700;">Directed By</b> :
+      {% for director in Directors %}
+        <a href="{% url 'cast:Director' director.id %}">{{director.name}}</a>&nbsp
+      {% endfor %}<br>
+      <b style="color:#FFD700;">Produced By</b> :
+      {% for producer in Producers %}
+        <a href="{% url 'cast:Producer' producer.id %}">{{producer.name}}</a>&nbsp
+      {% endfor %}  <br>
       <b style="color:#FFD700;">Release Date</b> :   {{show.releaseDate}}<br>
       <b style="color:#FFD700;">Budget</b> : Rs. {{show.budget}}<br>
       <b style="color:#FFD700;">Collection</b> :Rs. {{show.BoxOfficeCollection}}<br>
@@ -47,8 +53,8 @@
   <div class="row">
     {% for cast in cast %}
     <div class="col-md-2 cast" style="text-align:center;">
-      <a href="{% url 'cast:CAST' cast.id %}" class="link"><img src="/media/{{ cast.photo }}" width="180px" height="250px"></a><br>
-      <a href="{% url 'cast:CAST' cast.id %}" class="link">{{cast.name}}</a>
+      <a href="{% url 'cast:Cast' cast.id %}" class="link"><img src="/media/{{ cast.photo }}" width="180px" height="250px"></a><br>
+      <a href="{% url 'cast:Cast' cast.id %}" class="link">{{cast.name}}</a>
     </div>
     {% endfor %}
   </div><br><br>

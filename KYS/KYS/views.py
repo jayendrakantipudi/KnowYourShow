@@ -57,5 +57,10 @@ def search(request):
     ''')
 
     form = search_bar()
+    context = {
+        'search_form':form,
+        'movies':movies,
+        'movies_telugu':movies_telugu,
+    }
 
-    return render(request,'KYS/homePage.html',{'search_form':form,'movies':movies,'movies_telugu':movies_telugu})
+    return render(request,'KYS/homePage.html',context)

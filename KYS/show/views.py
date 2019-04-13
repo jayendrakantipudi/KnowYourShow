@@ -71,15 +71,13 @@ def movie(request,id):
         WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
         ;
     ''',[id])
-    director = cast.objects.raw('''
+    directors = cast.objects.raw('''
         SELECT * FROM cast_director
-        WHERE id in (SELECT  director_id FROM show_show_director WHERE show_id=%s);
-        ;
+        WHERE id in (SELECT director_id FROM show_show_director WHERE show_id=%s);
     ''',[id])
-    producer = cast.objects.raw('''
+    producers = cast.objects.raw('''
         SELECT * FROM cast_producer
-        WHERE id in (SELECT  producer_id FROM show_show_producer WHERE show_id=%s);
-        ;
+        WHERE id in (SELECT producer_id FROM show_show_producer WHERE show_id=%s);
     ''',[id])
     context = {
         'show':movies[0],
@@ -87,8 +85,8 @@ def movie(request,id):
         'cast':castActed,
         'Genres' : genres,
         'Languages':langs,
-        'Directors' : director,
-        'Producers' : producer,
+        'Directors':directors,
+        'Producers':producers,
     }
     return render(request,'show/movie.html',context)
 
