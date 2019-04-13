@@ -39,7 +39,7 @@
 
 
   <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <a class="navbar-brand" href="{% url 'search' %}">Navbar</a>
+  <a class="navbar-brand" href="{% url 'mainpage' %}">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -64,7 +64,7 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" method="post">
+    <form class="form-inline my-2 my-lg-0" action='{% url 'search' %}' method="post">
       {% csrf_token %}
       {{ search_form }}
       <script type="text/javascript">
@@ -72,7 +72,6 @@
       $(function () {
         $('#id_search_query').addClass('form-control mr-sm-2').attr("placeholder", "Search");
         $('#id_search_ty').addClass('nav-link dropdown-toggle').attr("data-toggle","dropdown").attr("aria-haspopup","true").attr("aria-expanded","false");
-
       });
       </script>
       <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
