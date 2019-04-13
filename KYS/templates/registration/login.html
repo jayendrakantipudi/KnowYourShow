@@ -1,16 +1,37 @@
 {% extends 'KYS/homePage.html' %}
 {% block content %}
 
+<div class="login-form">
+    <form method="POST">
+      {% csrf_token %}
+        <h2 class="text-center">Log in</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </div>
+        <div class="clearfix">
+            <!-- <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label> -->
+            <a href="#" class="pull-right">Forgot Password?</a>
+        </div>
+    </form>
+    <p class="text-center"><a href="#" class="create_acc_login">Create an Account</a></p>
+</div>
+
+{% endblock content %}
+
+
 <form method="POST">
     {% csrf_token %}
-    <p>
-        <label>Username</label>
-        <input type="text" name="username">
-    </p>
-    <p>
-        <label>Password</label>
-        <input type="password" name="password">
-    </p>
-    <button type="submit">Login</button>
+
+          <label>Username</label>
+          <input type="text" name="username" class="input_login">
+          <label>Password</label>
+          <input type="password" name="password" class="input_login">
+          <input type="submit" class="login_btn">
+
 </form>
-{% endblock content %}
