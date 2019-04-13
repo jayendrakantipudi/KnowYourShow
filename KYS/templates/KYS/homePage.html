@@ -132,13 +132,15 @@
   </a>
 </div><br><br>
 <div class="container-fluid" style="color:white;">
+{% for list_name,list in list_of_movies %}
+
     <div class="row">
         <div class="col-md-12 heading">
-          <h2 style="margin-left: 25px;">Movies</h2>
+          <h2 style="margin-left: 25px;">{{ list_name }}</h2>
         </div>
     </div>
     <div class="row">
-        {% for movie in movies %}
+        {% for movie in list %}
         <div class="col-md-2" style="text-align: center;">
           <a href="{% url 'show:movie' movie.id %}" class="link">
             <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">
@@ -147,21 +149,97 @@
         </div>
         {% endfor %}
     </div><br><br><br>
-    <div class="row">
-        <div class="col-md-12 heading">
-          <h2 style="margin-left: 25px;">Telugu Movies</h2>
-        </div>
-    </div>
-    <div class="row">
-        {% for movie in movies_telugu %}
-        <div class="col-md-2" style="text-align: center;">
-          <a href="{% url 'show:movie' movie.id %}" class="link">
-            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">
-          </a><br>
-          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>
-        </div>
-        {% endfor %}
-    </div>
+{% endfor %}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Telugu Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_telugu %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">English Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_english %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Tamil Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_tamil %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Malyalam Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_malyalam %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Hindi Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_hindi %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Horror Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_horror %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
 </div>
 {% endblock content %}
   </body>

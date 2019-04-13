@@ -28,10 +28,9 @@
     </div>
 {% endfor %}
 {% for result in all_shows_with_query %}
-    <div>
-        {{ result.id}}
-        <a href="{% url 'cast:CAST' result.id %}" class="link"><img src="/media/{{ result.photo }}" width="180px" height="250px">
-            {{ result.name }}
+    <div style="margin:30px;float:left;padding:1%">
+        <a href="{% url 'cast:CAST' result.id %}" class="link"><div><img src="/media/{{ result.photo }}" width="180px" height="250px"></div>
+            <div>{{ result.name }}</div>
         </a><br>
     </div>
 {% endfor %}
