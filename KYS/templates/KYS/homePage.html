@@ -15,39 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style media="screen">
-    #image{
-      width:90%;
-      height:120px;
-      margin-bottom:0px;
-    }
-    .navbar-nav > li{
-      padding-left:30px;
-      padding-right:30px;
-    }
 
-
-    #id_search_query,#id_search_ty{
-      padding-left:20px;
-      padding-right:20px;
-    }
-    #searchb{
-      /* padding-left:20px; */
-      margin-left: 10px;
-      background-color:#ffc119;
-      color:black;
-    }
-    #id_search_ty{
-      border-radius:5px;
-      background: #ffc119;
-    }
-    #id_search_ty > option{
-      background-color: white;
-      font-size: 20px;
-      background: #ffc119;
-    }
-    #searchb2{
-      margin-left:100px;
-    }
 
     </style>
   </head>
@@ -56,7 +24,7 @@
 
 
   <nav class="navbar navbar-expand-lg navbar-light bg-black" style="padding:0px;">
-  <a class="navbar-brand" href="#" style="padding:0px;"><img src="{% static 'logo5.png' %}"  alt="No logo" id="image"></a>
+  <a class="navbar-brand" href="{% url 'mainpage' %}" style="padding:0px;"><img src="{% static 'logo5.png' %}"  alt="No logo" id="image"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -92,12 +60,12 @@
       });
       </script>
       <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-      <button class="btn btn-success btn-mid" id="searchb" type="submit">Search</button>
+      <button class="button" type="submit">Search</button>
 
         {% if user.is_authenticated %}
-          <a class="btn btn-success btn-mid" id="searchb2" href="{% url 'logout' %}">Logout</a>
+          <a class="button button_log"  href="{% url 'logout' %}">Logout</a>
           {% else %}
-          <a class="btn btn-success btn-mid" id="searchb2" href="{% url 'login' %}">Login</a>
+          <a class="button button_log" href="{% url 'login' %}">Login</a>
         {% endif %}
       </a>
     </form>
