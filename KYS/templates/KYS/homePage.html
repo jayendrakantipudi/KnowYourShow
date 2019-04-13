@@ -81,7 +81,7 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" method="post">
+    <form class="form-inline my-2 my-lg-0" action='{% url 'search' %}' method="post">
       {% csrf_token %}
       {{ search_form }}
       <script type="text/javascript">
