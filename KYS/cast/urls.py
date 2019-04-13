@@ -7,7 +7,9 @@ from django.conf import settings
 
 app_name = 'cast'
 urlpatterns = [
-    path("cast/<id>/",views.Cast,name='CAST'),
+    path("cast/<id>/",views.Cast,name='Cast'),
+    path("director/<id>/",views.Director,name='Director'),
+    path("producer/<id>/",views.Producer,name='Producer'),
 ]
 
 

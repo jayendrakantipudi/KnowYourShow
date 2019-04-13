@@ -18,8 +18,12 @@ def mainpage(request):
     ''')
 
     form = search_bar()
-
-    return render(request,'KYS/homePage.html',{'search_form':form,'movies':movies,'movies_telugu':movies_telugu})
+    context = {
+        'search_form':form,
+        'movies':movies,
+        'movies_telugu':movies_telugu,
+    }
+    return render(request,'KYS/homePage.html',context)
 
 
 def search(request):
@@ -59,7 +63,8 @@ def search(request):
                 else:
                     key=False
                 context = {
-                              'all_searches': all_searches, 'key': key
+                              'all_searches': all_searches, 'key': key,
+                    'search_query': search_query,
                 }
                 return render(request, 'KYS/search_result.html', context)
 
@@ -77,7 +82,15 @@ def search(request):
                     key=True
                 else:
                     key=False
-
+                print(search_query)
                 context = {
-                    'all_shows_with_query': all_shows_with_query,'key':key}
+                    'all_shows_with_query': all_shows_with_query,
+                    'key':key,
+                    'search_query' : search_query,
+                }
                 return render(request, 'KYS/search_result.html', context)
+    form = search_bar()
+    context = {
+        'search_form':form,
+    }
+    return render(request,'KYS/homePage.html',context)

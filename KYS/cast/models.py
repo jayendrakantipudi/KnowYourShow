@@ -46,6 +46,8 @@ class director(models.Model):
 	def __str__(self):
 		return self.name
 
+
+
 class producer(models.Model):
 	GENDER = (
 			('Male','Male'),

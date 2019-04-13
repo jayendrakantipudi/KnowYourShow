@@ -20,8 +20,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('',views.mainpage,name='mainpage'),
     path('search',views.search,name='search'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('',include('show.urls')),
     path('',include('cast.urls')),
 ]
