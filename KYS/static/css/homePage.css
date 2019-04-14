@@ -13,9 +13,9 @@ body{
 }
 
 .button {
-  background-color:  #ffc119;
-  border: none;
-  color: black;
+  border:1px solid  #ffc119;
+  /* border: none; */
+  color: white;
   padding: 9px 20px;
   text-align: center;
   text-decoration: none;
@@ -23,6 +23,11 @@ body{
   font-size: 16px;
   margin: 3px 0.5px;
   cursor: pointer;
+}
+.button:hover{
+  background-color: #ffc119;
+  text-decoration: none;
+  color:black;
 }
 
 .button_log{
@@ -90,9 +95,9 @@ body{
   }
   #searchb{
     /* padding-left:20px; */
-    margin-left: 10px;
+    /* margin-left: 10px;
     background-color:#ffc119;
-    color:black;
+    color:black; */
   }
   #id_search_ty{
     /* border-radius:5px; */
