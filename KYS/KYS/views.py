@@ -5,7 +5,6 @@ from show.models import Show
 from cast.models import cast
 from django.shortcuts import redirect
 
-
 def mainpage(request):
 
     movies = Show.objects.raw('''
