@@ -7,22 +7,92 @@ from django.shortcuts import redirect
 
 
 def mainpage(request):
-
+    list_of_movies=[]
     movies = Show.objects.raw('''
         SELECT * FROM show_show;
     ''')
+
+    list_of_movies.append(["Movies",movies])
     movies_telugu = Show.objects.raw('''
         SELECT * FROM show_show
         WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages="Telugu"));
         ;
     ''')
 
+    list_of_movies.append(["Telugu Movies", movies_telugu])
+    movies_english = Show.objects.raw('''
+        SELECT * FROM show_show
+        WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages="English"));
+        ;
+    ''')
+
+    list_of_movies.append(["Engish Movies", movies_english])
+    movies_tamil = Show.objects.raw('''
+            SELECT * FROM show_show
+            WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages="Tamil"));
+            ;
+        ''')
+
+    list_of_movies.append(["Tamil Movies", movies_tamil])
+    movies_malyalam = Show.objects.raw('''
+                SELECT * FROM show_show
+                WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages="Malyalam"));
+                ;
+            ''')
+
+    list_of_movies.append(["Malyalam Movies", movies_malyalam])
+    movies_hindi = Show.objects.raw('''
+                    SELECT * FROM show_show
+                    WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages="Hindi"));
+                    ;
+                ''')
+
+    list_of_movies.append(["Hindi Movies", movies_hindi])
+    movies_horror = Show.objects.raw('''
+                        select * from show_show where id in(select show_id from show_show_genre where genre_id in (select id from show_genre where genres="Horror"));
+                        ;
+                    ''')
+
+    list_of_movies.append(["Horror Movies", movies_horror])
+    movies_comedy = Show.objects.raw('''
+                            select * from show_show where id in(select show_id from show_show_genre where genre_id in (select id from show_genre where genres="Comedy"));
+                            ;
+                        ''')
+
+    list_of_movies.append(["Comedy Movies", movies_comedy])
+    movies_suspense= Show.objects.raw('''
+                                select * from show_show where id in(select show_id from show_show_genre where genre_id in (select id from show_genre where genres="Suspense"));
+                                ;
+                            ''')
+
+    list_of_movies.append(["Suspense Movies", movies_suspense])
+    movies_thriller = Show.objects.raw('''
+                                select * from show_show where id in(select show_id from show_show_genre where genre_id in (select id from show_genre where genres="Thriller"));
+                                ;
+                            ''')
+
+    list_of_movies.append(["Thriller Movies", movies_thriller])
+    movies_drama = Show.objects.raw('''
+                                select * from show_show where id in(select show_id from show_show_genre where genre_id in (select id from show_genre where genres="Drama"));
+                                ;
+                            ''')
+
+    list_of_movies.append(["Drama Movies", movies_drama])
     form = search_bar()
+
     context = {
+        # 'search_form':form,
+        # 'movies':movies,
+        # 'movies_telugu':movies_telugu,
+        # 'movies_english':movies_english,
+        # 'movies_tamil': movies_tamil,
+        # 'movies_malyalam': movies_malyalam,
+        # 'movies_hindi': movies_hindi,
+        # 'movies_horror':movies_horror,
         'search_form':form,
-        'movies':movies,
-        'movies_telugu':movies_telugu,
+        'list_of_movies':list_of_movies,
     }
+
     return render(request,'KYS/homePage.html',context)
 
 
@@ -89,8 +159,8 @@ def search(request):
                     'search_query' : search_query,
                 }
                 return render(request, 'KYS/search_result.html', context)
-    form = search_bar()
-    context = {
-        'search_form':form,
-    }
-    return render(request,'KYS/homePage.html',context)
+    # form = search_bar()
+    # context = {
+    #     'search_form':form,
+    # }
+    # return render(request,'KYS/homePage.html',{})
