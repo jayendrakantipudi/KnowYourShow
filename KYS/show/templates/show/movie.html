@@ -22,8 +22,8 @@ s{% extends "show/base_show.html" %}
         <a href="{% url 'cast:Producer' producer.id %}">{{producer.name}}</a>&nbsp
       {% endfor %}  <br>
       <b style="color:#FFD700;">Release Date</b> :   {{show.releaseDate}}<br>
-      <b style="color:#FFD700;">Budget</b> : Rs. {{show.budget}}<br>
-      <b style="color:#FFD700;">Collection</b> :Rs. {{show.BoxOfficeCollection}}<br>
+      <b style="color:#FFD700;">Budget</b> : Rs. {{show.budget}} Cr<br>
+      <b style="color:#FFD700;">Collection</b> :Rs. {{show.BoxOfficeCollection}} Cr<br>
       <b style="color:#FFD700;">Languages</b> <br>
       <ul>
         {% for lang in Languages %}
