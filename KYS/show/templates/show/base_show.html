@@ -53,6 +53,23 @@
       $('#id_search_query').addClass('form-control mr-sm-2').attr("placeholder", "Search");
       $('#id_search_ty').addClass('nav-link dropdown-toggle ').attr("data-toggle","dropdown").attr("aria-haspopup","true").attr("aria-expanded","false");
     });
+
+    $('.thumbnail').click(function(){
+    	$('.modal-body').empty();
+    	var title = $(this).parent('a').attr("title");
+    	$('.modal-title').html(title);
+    	$($(this).parents('div').html()).appendTo('.modal-body');
+    	$('#myModal').modal({show:true});
+  });
+
+  /* blur on modal open, unblur on close */
+  $('#myModal').on('show.bs.modal', function () {
+     $('.col-6,.row .thumbnail').addClass('blur');
+  })
+
+  $('#myModal').on('hide.bs.modal', function () {
+     $('.col-6,.row .thumbnail').removeClass('blur');
+  })
     </script>
     <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
     <button class="button"  type="submit">Search</button>

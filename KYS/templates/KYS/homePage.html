@@ -61,14 +61,14 @@
       </script>
       <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
       <button class="button" type="submit">Search</button>
-
+    </form>
         {% if user.is_authenticated %}
           <a class="button button_log"  href="{% url 'logout' %}">Logout</a>
           {% else %}
           <a class="button button_log" href="{% url 'login' %}">Login</a>
         {% endif %}
       </a>
-    </form>
+
   </div>
 </nav>
 <hr style="border: 2px solid #ffc119 ;">
