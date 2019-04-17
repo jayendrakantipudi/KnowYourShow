@@ -67,7 +67,8 @@ def episodepage(request, series_id, season_id, episodeNum):
 
     cast = Show.objects.raw('''
             SELECT * FROM cast_cast
-            WHERE id in (SELECT cast_id FROM tvshow_episode_cast WHERE episode_id in (SELECT id FROM tvshow_episode WHERE episodeNum=%s)                                                                        
+            WHERE id in (SELECT cast_id FROM tvshow_episode_cast WHERE episode_id in 
+                                                                    (SELECT id FROM tvshow_episode WHERE episodeNum=%s)                                                                       
             )
             
     ''', [episodeNum])

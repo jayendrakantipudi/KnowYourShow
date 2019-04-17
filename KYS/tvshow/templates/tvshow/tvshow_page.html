@@ -11,7 +11,10 @@
                 {% endfor %} <br>
     Genre : {% for genre in genres %}  {{genre.genres}} &nbsp {% endfor %}  <br>
     Series summary: {{ tvshow.seriesSummary }} <br><br>
-    Seasons : <br> {% for season in seasons %} <li> Season {{season.seasonNum}} </li> {% endfor %}  <br>
+    Seasons : <br>
+    {% for season in seasons %}
+<li> <a href="{% url 'tvshow:seasonpage' tvshow.id season.seasonNum %}"> Season {{season.seasonNum}} </a> </li>
+    {% endfor %}  <br>
 
 </body>
 </html>
