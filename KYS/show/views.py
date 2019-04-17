@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 from .forms import genreForm,languageForm,show_update_form
+from django.contrib.auth.decorators import login_required
 from django.db import connection
 from .models import language
 from KYS.forms import search_bar
@@ -138,7 +139,7 @@ def movie(request,id):
     return render(request,'show/movie.html',context)
 
 
-
+@login_required(login_url='/accounts/login/')
 def review_rate(request,id):
     if request.method == 'POST':
         try:

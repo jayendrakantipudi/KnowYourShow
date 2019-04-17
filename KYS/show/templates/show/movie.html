@@ -63,11 +63,16 @@ s{% extends "show/base_show.html" %}
       <h3>Review & Ratings</h3>
       </div>
     <div class="col-md-6 heading rate_btn">
-      {% if user_rated %}
+        {% if user.is_authenticated %}
+                {% if user_rated %}
         <button class="button" data-toggle="modal" data-target="#myModal">Already Rated</button>
       {% else %}
         <button class="button" data-toggle="modal" data-target="#myModal">Rate</button>
       {% endif %}
+          {% else %}
+          <a class="button button_log" href="{% url 'login' %}">Login to Rate</a>
+        {% endif %}
+
     </div>
   </div>
   <div class="row">
