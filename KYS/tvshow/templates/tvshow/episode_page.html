@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Season {{ season.seasonNum }} Episode {{ episode.episodeNum }}</title>
+</head>
+<body>
+
+    TV Show: {{ series.titleName }} <br>
+    Season no.: {{ season.seasonNum }} <br>
+    Episode Title : {{ episode.episodeName }} <br>
+    Release date : {{ episode.releaseDate }} <br>
+    Run Time : {{ episode.runTime }} <br>
+    Episode Summary : {{ episode.episodeSummary }}
+    Cast :
+    {% for person in cast %}
+        <li> {{person.name}} </li>
+    {% endfor %}
+</body>
+</html>
+
