@@ -20,12 +20,27 @@ body{
   text-decoration: none;
 }
 
-
+.modal-title{
+  color:black;
+}
+.modal-sub{
+  color:black;
+}
+textarea {
+  resize:none;
+  overflow:auto;
+}
+/* .modal-content{
+  border: 1px solid white;
+}
+.modal-body,.modal-header,.modal-footer{
+  background-color: black;
+} */
 
 .button {
-  background-color:  #ffc119;
+  background-color: black;
   border: none;
-  color: black;
+  color: #ffc119;
   padding: 9px 20px;
   text-align: center;
   text-decoration: none;
@@ -33,4 +48,14 @@ body{
   font-size: 16px;
   margin: 3px 0.5px;
   cursor: pointer;
+  border:1px solid #ffc119;
 }
+
+.button:hover{
+  background-color:  #ffc119;
+  color:black;
+}
+
+/* .rate_btn{
+  margin-bottom: 15px;
+} */
