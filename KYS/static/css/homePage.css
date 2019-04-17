@@ -1,21 +1,17 @@
-body{
-  background-color: black;
-}
-
 .link{
   text-decoration: none;
   color: white;
   font-size: 25px;
 }
 .link:hover{
-  color: #FFD700;
+  color: deepskyblue;
   text-decoration: none;
 }
 
 .button {
-  border:1px solid  #ffc119;
-  /* border: none; */
-  color: white;
+  background-color:  deepskyblue;
+  border: none;
+  color: black;
   padding: 9px 20px;
   text-align: center;
   text-decoration: none;
@@ -74,7 +70,7 @@ body{
     font-size: 18px;
   }
   .create_acc_login:hover{
-    color: #FFD700;
+    color: deepskyblue;
     text-decoration: none;
   }
 
@@ -95,18 +91,18 @@ body{
   }
   #searchb{
     /* padding-left:20px; */
-    /* margin-left: 10px;
-    background-color:#ffc119;
-    color:black; */
+    margin-left: 10px;
+    background-color:deepskyblue;
+    color:black;
   }
   #id_search_ty{
     /* border-radius:5px; */
-    background: #ffc119;
+    background: deepskyblue;
   }
   #id_search_ty > option{
     background-color: white;
     font-size: 20px;
-    background: #ffc119;
+    background: deepskyblue;
   }
   #searchb2{
     margin-left:100px;
