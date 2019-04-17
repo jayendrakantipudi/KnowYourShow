@@ -1,0 +1,113 @@
+body{
+  background-color: black;
+}
+
+.link{
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+}
+.link:hover{
+  color: #FFD700;
+  text-decoration: none;
+}
+
+.button {
+  border:1px solid  #ffc119;
+  /* border: none; */
+  color: white;
+  padding: 9px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px 0.5px;
+  cursor: pointer;
+}
+.button:hover{
+  background-color: #ffc119;
+  text-decoration: none;
+  color:black;
+}
+
+.button_log{
+  margin-left:100px;
+}
+
+.field_name{
+  color:white;
+}
+
+.login_btn{
+  width:100%;
+}
+.input_login{
+  width: 100%;
+}
+
+
+.login-form {
+  width: 340px;
+    margin: 50px auto;
+}
+  .login-form form {
+    margin-bottom: 15px;
+      background: #f7f7f7;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+  }
+  .login-form h2 {
+      margin: 0 0 15px;
+  }
+  .form-control, .btn {
+      min-height: 38px;
+      border-radius: 2px;
+  }
+  .btn {
+      font-size: 15px;
+      font-weight: bold;
+  }
+
+  .create_acc_login{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+  }
+  .create_acc_login:hover{
+    color: #FFD700;
+    text-decoration: none;
+  }
+
+  #image{
+    width:90%;
+    height:120px;
+    margin-bottom:0px;
+  }
+  .navbar-nav > li{
+    padding-left:30px;
+    padding-right:30px;
+  }
+
+
+  #id_search_query,#id_search_ty{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  #searchb{
+    /* padding-left:20px; */
+    /* margin-left: 10px;
+    background-color:#ffc119;
+    color:black; */
+  }
+  #id_search_ty{
+    /* border-radius:5px; */
+    background: #ffc119;
+  }
+  #id_search_ty > option{
+    background-color: white;
+    font-size: 20px;
+    background: #ffc119;
+  }
+  #searchb2{
+    margin-left:100px;
+  }
