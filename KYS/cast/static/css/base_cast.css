@@ -12,7 +12,7 @@
   text-decoration: none;
 }
 .button {
-  background-color:  #ffc119;
+  background-color:  deepskyblue;
   border: none;
   color: black;
   padding: 9px 20px;
@@ -31,17 +31,17 @@
 #searchb{
   /* padding-left:20px; */
   margin-left: 10px;
-  background-color:#ffc119;
+  background-color:deepskyblue;
   color:black;
 }
 #id_search_ty{
   border-radius:5px;
-  background: #ffc119;
+  background: deepskyblue;
 }
 #id_search_ty > option{
   background-color: white;
   font-size: 20px;
-  background: #ffc119;
+  background: deepskyblue;
 }
 #searchb2{
   margin-left:100px;

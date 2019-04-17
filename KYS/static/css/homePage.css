@@ -1,14 +1,10 @@
-body{
-  background-color: black;
-}
-
 .link{
   text-decoration: none;
   color: white;
   font-size: 25px;
 }
 .link:hover{
-  color: #FFD700;
+  color: deepskyblue;
   text-decoration: none;
 }
 

@@ -132,9 +132,11 @@ def search(request):
 
                 else:
                     key=False
+                form=search_bar()
                 context = {
                               'all_searches': all_searches, 'key': key,
                     'search_query': search_query,
+                    'search_form':form
                 }
                 return render(request, 'KYS/search_result.html', context)
 
@@ -153,14 +155,16 @@ def search(request):
                 else:
                     key=False
                 print(search_query)
+                form=search_bar()
                 context = {
                     'all_shows_with_query': all_shows_with_query,
                     'key':key,
                     'search_query' : search_query,
+                    'search_form':form,
                 }
                 return render(request, 'KYS/search_result.html', context)
-    # form = search_bar()
-    # context = {
-    #     'search_form':form,
-    # }
-    # return render(request,'KYS/homePage.html',{})
+    form = search_bar()
+    context = {
+        'search_form':form,
+    }
+    return render(request,'KYS/homePage.html',context)

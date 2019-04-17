@@ -1,9 +1,9 @@
-s{% extends "show/base_show.html" %}
+{% extends "show/base_show.html" %}
 {% load static %}
 {% load widget_tweaks %}
 {% block content %}
 <br><br>
-<div class="container" style="color:white;">
+<div class="container">
   <div class="row">
     <div class="col-md-10 heading">
       <h1>{{show.titleName}}&nbsp({{show.year}})</h1>
@@ -13,25 +13,25 @@ s{% extends "show/base_show.html" %}
   <div class="row">
     <div class="col-md-6"><img src="/media/{{show.titlePoster}}" width="500px" height="300px"></div>
     <div class="col-md-4">
-      <b style="color:#FFD700;">Directed By</b> :
+      <b style="color:deepskyblue;">Directed By</b> :
       {% for director in Directors %}
         <a href="{% url 'cast:Director' director.id %}">{{director.name}}</a>&nbsp
       {% endfor %}<br>
-      <b style="color:#FFD700;">Produced By</b> :
+      <b style="color:deepskyblue;">Produced By</b> :
       {% for producer in Producers %}
         <a href="{% url 'cast:Producer' producer.id %}">{{producer.name}}</a>&nbsp
       {% endfor %}  <br>
-      <b style="color:#FFD700;">Release Date</b> :   {{show.releaseDate}}<br>
-      <b style="color:#FFD700;">Budget</b> : Rs. {{show.budget}} Cr<br>
-      <b style="color:#FFD700;">Collection</b> :Rs. {{show.BoxOfficeCollection}} Cr<br>
-      <b style="color:#FFD700;">Languages</b> <br>
+      <b style="color:deepskyblue;">Release Date</b> :   {{show.releaseDate}}<br>
+      <b style="color:deepskyblue;">Budget</b> : Rs. {{show.budget}} Cr<br>
+      <b style="color:deepskyblue;">Collection</b> :Rs. {{show.BoxOfficeCollection}} Cr<br>
+      <b style="color:deepskyblue;">Languages</b> <br>
       <ul>
         {% for lang in Languages %}
         <li>{{lang.languages}}</li>
         {% endfor %}
       </ul>
 
-      <b style="color:#FFD700;">Genres</b> <br>
+      <b style="color:deepskyblue;">Genres</b> <br>
       <ul>
         {% for genre in Genres %}
         <li>{{genre.genres}}</li>
@@ -41,10 +41,10 @@ s{% extends "show/base_show.html" %}
     </div>
   </div><br>
   <div class="row">
-    <div class="col-md-9">
-      <b style="color:#FFD700;">Movie Plot</b> : {{show.storyLine}}
-    </div>
-  </div><br><br><br>
+    <div class="col-md-9" id="b">
+        <b style="color:deepskyblue;">Movie Plot</b> : {{show.storyLine}}
+    </div><a href='javascript:;' id="c" onclick="reveal()">see more</a>
+  </div> <a href="javascript:;" id="d" onclick="showless()" style="display:none">See less</a><br><br><br>
   <div class="row">
     <div class="col-md-10 heading">
       <h3>Cast & Crew</h3>
@@ -65,9 +65,22 @@ s{% extends "show/base_show.html" %}
   </div><br>
   <div class="row">
     <div class="col-md-5">
-      <b  style="color:#FFD700;">KYS Rating</b> :
+      <b  style="color:deepskyblue;">KYS Rating</b> :
     </div>
   </div><br><br><br>
 </div>
-
+<script>
+    function reveal() {
+        document.getElementById("b").style.overflow="visible";
+        document.getElementById("b").style.whiteSpace="normal";
+        document.getElementById("c").style.display="none";
+        document.getElementById("d").style.display="block";
+    }
+    function showless() {
+        document.getElementById("b").style.overflow="hidden";
+        document.getElementById("b").style.whiteSpace="nowrap";
+        document.getElementById("c").style.display="block";
+        document.getElementById("d").style.display="none";
+    }
+</script>
 {% endblock content %}
