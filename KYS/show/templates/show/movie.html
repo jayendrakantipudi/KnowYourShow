@@ -1,9 +1,9 @@
-{% extends "show/base_show.html" %}
+s{% extends "show/base_show.html" %}
 {% load static %}
 {% load widget_tweaks %}
 {% block content %}
 <br><br>
-<div class="container" style="color:white;">
+<div class="container background-container" style="color:white;">
   <div class="row">
     <div class="col-md-10 heading">
       <h1>{{show.titleName}}&nbsp({{show.year}})</h1>
@@ -13,11 +13,17 @@
   <div class="row">
     <div class="col-md-6"><img src="/media/{{show.titlePoster}}" width="500px" height="300px"></div>
     <div class="col-md-4">
-      <b style="color:#FFD700;">Directed By</b> : {% for director in Directors %} {{director.name}} &nbsp {% endfor %}<br>
-      <b style="color:#FFD700;">Produced By</b> : {% for producer in Producers %} {{producer.name}} &nbsp {% endfor %}  <br>
+      <b style="color:#FFD700;">Directed By</b> :
+      {% for director in Directors %}
+        <a href="{% url 'cast:Director' director.id %}">{{director.name}}</a>&nbsp
+      {% endfor %}<br>
+      <b style="color:#FFD700;">Produced By</b> :
+      {% for producer in Producers %}
+        <a href="{% url 'cast:Producer' producer.id %}">{{producer.name}}</a>&nbsp
+      {% endfor %}  <br>
       <b style="color:#FFD700;">Release Date</b> :   {{show.releaseDate}}<br>
-      <b style="color:#FFD700;">Budget</b> : Rs. {{show.budget}}<br>
-      <b style="color:#FFD700;">Collection</b> :Rs. {{show.BoxOfficeCollection}}<br>
+      <b style="color:#FFD700;">Budget</b> : Rs. {{show.budget}} Cr<br>
+      <b style="color:#FFD700;">Collection</b> :Rs. {{show.BoxOfficeCollection}} Cr<br>
       <b style="color:#FFD700;">Languages</b> <br>
       <ul>
         {% for lang in Languages %}
@@ -53,15 +59,80 @@
     {% endfor %}
   </div><br><br>
   <div class="row">
-    <div class="col-md-10 heading">
+    <div class="col-md-6 heading">
       <h3>Review & Ratings</h3>
+      </div>
+    <div class="col-md-6 heading rate_btn">
+        {% if user.is_authenticated %}
+                {% if user_rated %}
+        <button class="button" data-toggle="modal" data-target="#myModal">Already Rated</button>
+      {% else %}
+        <button class="button" data-toggle="modal" data-target="#myModal">Rate</button>
+      {% endif %}
+          {% else %}
+          <a class="button button_log" href="{% url 'login' %}">Login to Rate</a>
+        {% endif %}
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <b  style="color:#FFD700;">KYS Rating</b> : {% if RATING_INFO %}<b>{{KYSrating}}</b>({{total_reviews}}){% else %}<b>Not Rated Yet</b>  {% endif %}
     </div>
   </div><br>
   <div class="row">
-    <div class="col-md-5">
-      <b  style="color:#FFD700;">KYS Rating</b> :
+    {% for review in reviews %}
+    <div class="col-md-12">
+      {{review.username}}<br>
+      -------------------<br>
+      <b  style="color:#FFD700;">Rating</b> : {{review.rating}}/5 <br>
+      <b  style="color:#FFD700;">Review</b> : {{review.Review}}<br><br><br><br>
     </div>
-  </div><br><br><br>
+    {% endfor %}
+  </div>
 </div>
+
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Rate And Review</h4>
+          <button type="button" class="close" data-dismiss="modal" style="color:black">&times;</button>
+        </div>
+        <form  method="POST" action="{% url 'show:review_rate' show.id %}">
+          {% csrf_token %}
+                  <div class="modal-body">
+
+                      <label for="" class="modal-sub">Rate&nbsp &nbsp</label>
+                      <select name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select><br>
+                      <label for="" class="modal-sub">Review</label>
+                      <textarea id="Review" rows="5" cols="100" style="resize:none;overflow:auto;" name="Review"></textarea>
+                  </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-success" style="margin-left: 500px;">
+          </form>
+          <button type="button" class="btn btn-danger modal_cancel_btn"  data-dismiss="modal" style="margin-right: 20px;">Cancel</button>
+        </div>
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock content %}
