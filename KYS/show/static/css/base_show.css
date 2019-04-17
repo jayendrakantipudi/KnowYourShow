@@ -1,5 +1,9 @@
+
+
 body{
-  background-color: black;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .heading{
@@ -8,7 +12,7 @@ body{
 
 .link{
   text-decoration: none;
-  color: white;
+  color:black;
   font-size: 25px;
 }
 .link:hover{
