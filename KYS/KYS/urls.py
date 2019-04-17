@@ -23,6 +23,7 @@ urlpatterns = [
     path('',views.search,name='search'),
     path('',include('show.urls')),
     path('',include('cast.urls')),
+    path('',include('tvshow.urls'))
 ]
 
 if settings.DEBUG:

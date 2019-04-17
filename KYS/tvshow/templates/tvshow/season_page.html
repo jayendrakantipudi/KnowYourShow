@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ tvshow.seriesName }} Season {{ season.seasonNum }}</title> <br>
+</head>
+<body>
+
+    TV Show : {{ tvshow.seriesName }}  <br>
+    Season No. :{{ season_id }} <br>
+    Episodes : {% for episode in episodes %}
+                    <li> Episode {{ episode.episodeNum }} - {{ episode.episodeName }} </li>
+                {% endfor %}
+</body>
+</html>

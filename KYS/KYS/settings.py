@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'show',
     'cast',
     'users',
+    'tvshow',
     'widget_tweaks',
 ]
 

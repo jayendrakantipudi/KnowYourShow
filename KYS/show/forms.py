@@ -1,5 +1,5 @@
 from django import forms
-from . models import GENRE,language, Show
+from . models import GENRE,language,Show
 
 
 class languageForm(forms.ModelForm):

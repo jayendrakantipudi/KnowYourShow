@@ -1,5 +1,5 @@
 from django.db import models
-from cast.models import cast,director,producer
+from cast.models import cast, director, producer
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -31,7 +31,6 @@ class Show(models.Model):
 	BoxOfficeCollection = models.FloatField(null=True)
 	GENRE = models.ManyToManyField(GENRE)
 	titlePoster = models.ImageField(upload_to='movie_posters',blank=True)
-	titlePoster1 = models.ImageField(upload_to='movie_posters',blank=True)
 	cast = models.ManyToManyField(cast)
 	review = models.ForeignKey(review, on_delete=models.SET_NULL,blank=True ,null=True)
 	def __str__(self):

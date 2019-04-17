@@ -4,7 +4,7 @@ from .models import TVShow, Season, Episode
 class seriesForm(forms.ModelForm):
     class Meta:
         model = TVShow
-        fields = ('titleName', 'season', 'seriesReview', 'GENRE', 'language', 'seriesSummary')
+        fields = ('titleName', 'seriesReview', 'GENRE', 'language', 'seriesSummary')
 
 class seasonForm(forms.ModelForm):
     class Meta:
