@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ tvshow.titleName }}</title>
+</head>
+<body>
+
+    Language:   {% for language in langs %}
+                    {{language.languages}} &nbsp
+                {% endfor %} <br>
+    Genre : {% for genre in genres %}  {{genre.genres}} &nbsp {% endfor %}  <br>
+    Series summary: {{ tvshow.seriesSummary }} <br><br>
+    Seasons : <br>
+    {% for season in seasons %}
+<li> <a href="{% url 'tvshow:seasonpage' tvshow.id season.seasonNum %}"> Season {{season.seasonNum}} </a> </li>
+    {% endfor %}  <br>
+
+</body>
+</html>

@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+    <option name="SCOPE_TYPE" value="3" />
+    <option name="SHOW_STRUCTURE" value="true" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3a60f145-6c21-4a1d-bb0d-e84f5238d98f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/KYS/tvshow/templates/tvshow/season_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/KYS/tvshow/templates/tvshow/season_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KYS/tvshow/templates/tvshow/tvshow_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/KYS/tvshow/templates/tvshow/tvshow_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KYS/tvshow/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/KYS/tvshow/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KYS/tvshow/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/KYS/tvshow/views.py" afterDir="false" />
+=======
   <component name="ChangeListManager">
     <list default="true" id="d8a3ee1f-1439-4cf9-8809-84c74ffa93d2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/KYS/KYS/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/KYS/KYS/views.py" afterDir="false" />
@@ -7,6 +20,7 @@
       <change beforePath="$PROJECT_DIR$/KYS/cast/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/KYS/cast/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KYS/templates/KYS/homePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/KYS/templates/KYS/homePage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KYS/templates/KYS/search_result.html" beforeDir="false" afterPath="$PROJECT_DIR$/KYS/templates/KYS/search_result.html" afterDir="false" />
+>>>>>>> Jayendra
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +28,91 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KYS/tvshow/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="63" column="114" selection-start-line="63" selection-start-column="114" selection-end-line="63" selection-end-column="114" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KYS/tvshow/templates/tvshow/season_page.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="12" column="99" lean-forward="true" selection-start-line="12" selection-start-column="99" selection-end-line="12" selection-end-column="99" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KYS/show/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-64">
+              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/KYS/tvshow/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="13" column="32" lean-forward="true" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KYS/tvshow/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KYS/tvshow/templates/tvshow/tvshow_page.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="15" column="70" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+=======
   <component name="FUSProjectUsageTrigger">
     <session id="259672525">
       <usages-collector id="statistics.lifecycle.project">
@@ -70,32 +169,85 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+>>>>>>> Jayendra
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+<<<<<<< HEAD
+        <option value="Python Script" />
+        <option value="HTML File" />
+=======
         <option value="HTML File" />
         <option value="Python Script" />
+>>>>>>> Jayendra
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
+      <find>static</find>
+      <find>media</find>
+      <find>rele</find>
+      <find>seasonNo</find>
+      <find>season_</find>
+=======
       <find>stat</find>
       <find>h</find>
+>>>>>>> Jayendra
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/KYS/tvshow/templates/tvshow/episode_page.html" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KYS/tvshow/templates/tvshow/season_page.html" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+=======
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="Jayendra" />
       </map>
     </option>
+>>>>>>> Jayendra
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/d4698a8c-8095-46c6-83cd-390452d30ebc/console.sql" />
+        <option value="$PROJECT_DIR$/KYS/show/views.py" />
+        <option value="$PROJECT_DIR$/KYS/templates/homePage.html" />
+        <option value="$PROJECT_DIR$/KYS/show/templates/show/movie.html" />
+        <option value="$PROJECT_DIR$/KYS/show/urls.py" />
+        <option value="$PROJECT_DIR$/KYS/KYS/settings.py" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/admin.py" />
+        <option value="$PROJECT_DIR$/KYS/KYS/urls.py" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/templates/tvshow_page.html" />
+        <option value="$PROJECT_DIR$/KYS/show/forms.py" />
+        <option value="$PROJECT_DIR$/KYS/show/models.py" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/forms.py" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/templates/tvshow/season_page" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/models.py" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/templates/tvshow/episode_page.html" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/views.py" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/templates/tvshow/tvshow_page.html" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/templates/tvshow/season_page.html" />
+        <option value="$PROJECT_DIR$/KYS/tvshow/urls.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="115" />
+    <option name="y" value="550" />
+    <option name="width" value="1750" />
+    <option name="height" value="575" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+=======
         <option value="$PROJECT_DIR$/KYS/KYS/settings.py" />
         <option value="$PROJECT_DIR$/KYS/cast/templates/homePage.html" />
         <option value="$PROJECT_DIR$/KYS/templates/homePage.html" />
@@ -124,6 +276,7 @@
     <option name="y" value="-35" />
     <option name="width" value="1265" />
     <option name="height" value="715" />
+>>>>>>> Jayendra
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -153,6 +306,16 @@
               <item name="KnowYourShow" type="b2602c69:ProjectViewProjectNode" />
               <item name="KnowYourShow" type="462c0819:PsiDirectoryNode" />
               <item name="KYS" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+              <item name="cast" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KnowYourShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KnowYourShow" type="462c0819:PsiDirectoryNode" />
+              <item name="KYS" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> Jayendra
               <item name="KYS" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -161,6 +324,45 @@
               <item name="KYS" type="462c0819:PsiDirectoryNode" />
               <item name="show" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
+            <path>
+              <item name="KnowYourShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KnowYourShow" type="462c0819:PsiDirectoryNode" />
+              <item name="KYS" type="462c0819:PsiDirectoryNode" />
+              <item name="show" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KnowYourShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KnowYourShow" type="462c0819:PsiDirectoryNode" />
+              <item name="KYS" type="462c0819:PsiDirectoryNode" />
+              <item name="show" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="show" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KnowYourShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KnowYourShow" type="462c0819:PsiDirectoryNode" />
+              <item name="KYS" type="462c0819:PsiDirectoryNode" />
+              <item name="tvshow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KnowYourShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KnowYourShow" type="462c0819:PsiDirectoryNode" />
+              <item name="KYS" type="462c0819:PsiDirectoryNode" />
+              <item name="tvshow" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KnowYourShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KnowYourShow" type="462c0819:PsiDirectoryNode" />
+              <item name="KYS" type="462c0819:PsiDirectoryNode" />
+              <item name="tvshow" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="tvshow" type="462c0819:PsiDirectoryNode" />
+            </path>
+=======
+>>>>>>> Jayendra
           </expand>
           <select />
         </subPane>
@@ -170,6 +372,16 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\DBMS\KnowYourShow\KYS\tvshow\templates\tvshow" />
+=======
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/ASE1-Project" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -182,6 +394,7 @@
       <recent name="D:\KnowYourShow\KYS\static\css" />
       <recent name="D:\KnowYourShow\KYS" />
       <recent name="D:\KnowYourShow\KYS\KYS\templates" />
+>>>>>>> Jayendra
     </key>
   </component>
   <component name="RunDashboard">
@@ -201,6 +414,49 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
+      <changelist id="3a60f145-6c21-4a1d-bb0d-e84f5238d98f" name="Default Changelist" comment="" />
+      <created>1554230043106</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1554230043106</updated>
+      <workItem from="1554230062508" duration="600000" />
+      <workItem from="1554231136557" duration="593000" />
+      <workItem from="1554616455604" duration="10661000" />
+      <workItem from="1554705371514" duration="971000" />
+      <workItem from="1554971128409" duration="14533000" />
+      <workItem from="1555171258774" duration="1721000" />
+      <workItem from="1555173373586" duration="29081000" />
+      <workItem from="1555347185850" duration="18267000" />
+      <workItem from="1555505906989" duration="8226000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="84653000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14812332" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.32956153" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32956153" />
+      <window_info anchor="bottom" id="Run" order="3" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.5304102" />
+      <window_info anchor="bottom" id="Database Changes" order="10" weight="0.3286119" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50067025" side_tool="true" weight="0.29278642" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49932975" visible="true" weight="0.19660537" />
+      <window_info anchor="bottom" id="Python Console" order="13" weight="0.3281471" />
+=======
       <changelist id="d8a3ee1f-1439-4cf9-8809-84c74ffa93d2" name="Default Changelist" comment="" />
       <created>1554980547724</created>
       <option name="number" value="Default" />
@@ -228,10 +484,15 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Python Console" order="12" />
+>>>>>>> Jayendra
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
+<<<<<<< HEAD
+      <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
+    </layout>
+=======
       <window_info anchor="right" id="Database" order="4" />
     </layout>
     <layout-to-restore>
@@ -257,10 +518,101 @@
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" />
     </layout-to-restore>
+>>>>>>> Jayendra
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+<<<<<<< HEAD
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/d4698a8c-8095-46c6-83cd-390452d30ebc/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/templates/homePage.html" />
+    <entry file="file://$PROJECT_DIR$/KYS/cast/templates/homePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/show/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/cast/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/show/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/KYS/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/KYS/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+=======
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -299,6 +651,7 @@
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
+>>>>>>> Jayendra
         </state>
       </provider>
     </entry>
@@ -311,6 +664,36 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/KYS/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/cast/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" selection-start-line="4" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/KYS/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="24" selection-start-column="24" selection-end-column="24" />
+=======
     <entry file="file://$PROJECT_DIR$/KYS/cast/templates/cast.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -338,11 +721,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="116" selection-start-line="116" selection-end-line="116" />
+>>>>>>> Jayendra
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/KYS/show/templates/show/movie.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="160">
+          <caret line="16" column="124" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/show/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/show/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="76" selection-start-line="16" selection-start-column="75" selection-end-line="16" selection-end-column="76" />
+          <folding>
+            <element signature="e#1#33#0" expanded="true" />
+=======
         <state>
           <caret column="35" selection-start-column="35" selection-end-column="35" />
         </state>
@@ -360,19 +767,63 @@
         <state>
           <folding>
             <element signature="e#0#24#0" expanded="true" />
+>>>>>>> Jayendra
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/templates/tvshow/season_page" />
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+=======
     <entry file="file://$PROJECT_DIR$/KYS/show/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
+>>>>>>> Jayendra
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/KYS/show/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1120">
+          <caret line="70" column="76" selection-start-line="70" selection-start-column="76" selection-end-line="70" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/cast/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/templates/tvshow/episode_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+=======
     <entry file="file://$PROJECT_DIR$/KYS/KYS/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -400,10 +851,19 @@
           <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
+>>>>>>> Jayendra
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/KYS/show/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-64">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+=======
     <entry file="file://$PROJECT_DIR$/KYS/templates/KYS/search_result.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -411,20 +871,51 @@
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+>>>>>>> Jayendra
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/templates/tvshow/tvshow_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="70" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/templates/tvshow/season_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="99" lean-forward="true" selection-start-line="12" selection-start-column="99" selection-end-line="12" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="63" column="114" selection-start-line="63" selection-start-column="114" selection-end-line="63" selection-end-column="114" />
+=======
     <entry file="file://$PROJECT_DIR$/KYS/KYS/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="91" column="18" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
+>>>>>>> Jayendra
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/KYS/tvshow/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="13" column="32" lean-forward="true" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+=======
     <entry file="file://$PROJECT_DIR$/KYS/cast/templates/cast/cast.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -432,6 +923,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+>>>>>>> Jayendra
         </state>
       </provider>
     </entry>
