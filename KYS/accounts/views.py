@@ -20,15 +20,14 @@ def signup(request):
             new_user.save()
             age = form.cleaned_data.get('age')
             picture = form.cleaned_data.get('picture')
-            USER=USER()
-            USER.user = new_user
+            Profile=Profile()
+            Profile.user = new_user
             if picture:
-                USER.picture = picture
-            USER.age=age
-            USER.save()
+                Profile.picture = picture
+            Profile.age=age
+            Profile.save()
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
     else:
-        print(2)
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
