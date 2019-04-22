@@ -27,7 +27,7 @@ def movie(request,id):
             all_searches = []
             if search_ty == 'movies':
                 all_shows_with_query = Show.objects.raw('''
-                            SELECT id,titleName , LOCATE(%s,titleName)
+                            SELECT *,EXTRACT(YEAR FROM releaseDate) AS year, LOCATE(%s,titleName)
                             FROM show_show
                             WHERE locate(%s,titleName)>0;
                 ''',[search_query,search_query])
@@ -37,7 +37,7 @@ def movie(request,id):
 
 
                 all_shows_with_query1 = Show.objects.raw('''
-                        SELECT id,titleName , LOCATE(%s,storyLine)
+                        SELECT *, EXTRACT(YEAR FROM releaseDate) AS year,LOCATE(%s,storyLine)
                         FROM show_show
                         WHERE locate(%s,storyLine)>0;
                 ''',[search_query,search_query])
@@ -51,7 +51,7 @@ def movie(request,id):
                     print(i)
             else:
                 all_shows_with_query = cast.objects.raw('''
-                            SELECT id,name , LOCATE(%s,name)
+                            SELECT *, EXTRACT(YEAR FROM releaseDate) AS year,LOCATE(%s,name)
                             FROM cast_cast
                             WHERE locate(%s,name)>0;
                 ''',[search_query,search_query])
@@ -90,18 +90,25 @@ def movie(request,id):
     ''',[id])
     reviews = Show.objects.raw('''
         SELECT *,username FROM show_review,auth_user
-        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id;
+        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id
+        ORDER BY date_reviewed;
     ''',[id])
     avgRating =Show.objects.raw('''
         SELECT id,AVG(rating) AS KYSavg,COUNT(*) AS total FROM show_review
         WHERE show_id = %s;
     ''',[id])
     currentUser_review = Show.objects.raw('''
-        SELECT * FROM show_review
-        WHERE show_id = %s AND reviewer_id=%s;
+        SELECT *,username FROM show_review,auth_user
+        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id AND show_review.reviewer_id=%s;
     ''',[id,request.user.id])
+    if reviews:
+        RATING_INFO = True
+        total_rating = round(avgRating[0].KYSavg,2)
+    else:
+        RATING_INFO = False
+        total_rating = 0
 
-    if not avgRating[0].KYSavg:
+    if not currentUser_review:
         context = {
             'show':movies[0],
             'search_form':form,
@@ -110,16 +117,14 @@ def movie(request,id):
             'Languages':langs,
             'reviews':reviews,
             'Directors':directors,
+            'total_reviews':len(reviews),
             'Producers':producers,
             'user_rated':user_rated,
-            'RATING_INFO': False,
+            'RATING_INFO': RATING_INFO,
+            'KYSrating':total_rating,
         }
     else:
-        total_rating = round(avgRating[0].KYSavg,2)
-        # if currentUser_review:
-        #     temp = False
-        # else:
-        #     temp = currentUser_review[0],
+
         context = {
             'show':movies[0],
             'search_form':form,
@@ -130,11 +135,10 @@ def movie(request,id):
             'Directors':directors,
             'Producers':producers,
             'user_rated':user_rated,
-            'total_reviews':avgRating[0].total,
-            'RATING_INFO': True,
+            'total_reviews':len(reviews),
+            'currentUser_review':currentUser_review[0],
+            'RATING_INFO': RATING_INFO,
             'KYSrating': total_rating,
-            # 'user_review':temp,
-
         }
     return render(request,'show/movie.html',context)
 
@@ -154,52 +158,30 @@ def review_rate(request,id):
             SELECT * FROM show_review
             WHERE reviewer_id=%s AND show_id=%s;
         ''',[request.user.id,id])
-        if not len(user_review):
+        if not user_review:
             with connection.cursor() as cursor:
                 cursor.execute('''
-                    INSERT INTO show_review (rating,Review,reviewer_id,show_id)
-                    VALUES(%s,%s,%s,%s);
+                    INSERT INTO show_review (rating,Review,reviewer_id,show_id,date_reviewed,edited)
+                    VALUES(%s,%s,%s,%s,CURRENT_TIMESTAMP,False);
+                ''',[rating,Review,request.user.id,id,])
+        elif Review != False and rating != False and (user_review[0].Review != Review  or user_review[0].rating != int(rating)):
+            print()
+            print()
+            print(type(user_review[0].rating))
+            print(type(rating))
+            print(user_review[0].rating is not int(rating))
+            print()
+            print()
+
+
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                    UPDATE show_review
+                    SET rating=%s,Review=%s,edited=True
+                    WHERE reviewer_id=%s AND show_id=%s;
                 ''',[rating,Review,request.user.id,id])
-    if request.method == 'POST':
-        form = search_bar(request.POST)
-        if form.is_valid():
-            search_list =  ['titleName','storyLine']
-            search_query = form.cleaned_data['search_query']
-            search_ty = form.cleaned_data['search_ty']
-            all_searches = []
-            if search_ty == 'movies':
-                all_shows_with_query = Show.objects.raw('''
-                            SELECT id,titleName , LOCATE(%s,titleName)
-                            FROM show_show
-                            WHERE locate(%s,titleName)>0;
-                ''',[search_query,search_query])
-
-                for i in all_shows_with_query:
-                    all_searches.append(i)
-
-
-                all_shows_with_query1 = Show.objects.raw('''
-                        SELECT id,titleName , LOCATE(%s,storyLine)
-                        FROM show_show
-                        WHERE locate(%s,storyLine)>0;
-                ''',[search_query,search_query])
-                for i in all_shows_with_query1:
-                    all_searches.append(i)
-
-                all_searches = set(all_searches)
-
-
-                for i in all_searches:
-                    print(i)
-            else:
-                all_shows_with_query = cast.objects.raw('''
-                            SELECT id,name , LOCATE(%s,name)
-                            FROM cast_cast
-                            WHERE locate(%s,name)>0;
-                ''',[search_query,search_query])
-
-                for i in all_shows_with_query:
-                    print(i)
+        else:
+            print("hello")
     movies = Show.objects.raw('''
         SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
         WHERE id=%s
@@ -241,7 +223,8 @@ def review_rate(request,id):
     ''',[id])
     reviews = Show.objects.raw('''
         SELECT *,username FROM show_review,auth_user
-        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id;
+        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id
+        ORDER BY date_reviewed;
     ''',[id])
 
     avgRating =Show.objects.raw('''
@@ -249,11 +232,11 @@ def review_rate(request,id):
         WHERE show_id = %s;
     ''',[id])
     currentUser_review = Show.objects.raw('''
-        SELECT * FROM show_review
-        WHERE show_id = %s AND reviewer_id=%s;
+        SELECT *,username FROM show_review,auth_user
+        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id AND show_review.reviewer_id=%s;
     ''',[id,request.user.id])
 
-    if not avgRating[0].KYSavg:
+    if not currentUser_review:
         context = {
             'show':movies[0],
             'search_form':form,
@@ -278,20 +261,12 @@ def review_rate(request,id):
             'Directors':directors,
             'Producers':producers,
             'user_rated':user_rated,
+            'currentUser_review':currentUser_review[0],
             'total_reviews':avgRating[0].total,
             'RATING_INFO': True,
             'KYSrating': total_rating,
             'user_review':currentUser_review[0],
         }
-
-    print()
-    print()
-    print(request.user.id)
-    print(id)
-    # print(rating)
-    # print(Review)
-    print()
-    print()
     return render(request,'show/movie.html',context)
 
 

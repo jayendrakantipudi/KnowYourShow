@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ tvshow.seriesName }} Season {{ season.seasonNum }}</title> <br>
+    <title>{{ tvshow.titleName }} Season {{ season.seasonNum }}</title> <br>
 </head>
 <body>
 
-    TV Show : {{ tvshow.seriesName }}  <br>
+    TV Show : {{ tvshow.titleName }}  <br>
     Season No. :{{ season_id }} <br>
     Episodes : {% for episode in episodes %}
                     <li>
-                        <a href="{% url 'tvshow:episodepage' tvshow.id season.id episode.episodeNum %}">
-                            Episode {{ episode.episodeNum }} - {{ episode.episodeName }}
-                        </a>
+                      <a href="{% url 'tvshow:episodepage' episode.series_id episode.season_id episode.episodeNum %}">
+                          Episode {{ episode.episodeNum }} - {{ episode.episodeName }}
+                      </a>
                     </li>
                 {% endfor %}
 </body>

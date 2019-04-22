@@ -7,7 +7,7 @@ app_name = 'tvshow'
 urlpatterns = [
     path("tvshow/<int:id>", views.tvshowpage),
     path("tvshow/<int:series_id>/s<int:season_id>/", views.seasonpage,name='seasonpage'),
-    path("tvshow/<int:series_id>/s<int:season_id>e<int:episodeNum>", views.episodepage, name='episodepage')
+    path("tvshow/<int:series_id>/s<int:season_id>/e<int:episodeNum>/", views.episodepage, name='episodepage')
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

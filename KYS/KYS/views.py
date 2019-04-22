@@ -106,7 +106,7 @@ def search(request):
             all_searches = []
             if search_ty == 'movies':
                 all_shows_with_query = Show.objects.raw('''
-                               SELECT id,titleName , LOCATE(%s,titleName)
+                               SELECT *, EXTRACT(YEAR FROM releaseDate) AS year,LOCATE(%s,titleName)
                                FROM show_show
                                WHERE locate(%s,titleName)>0;
                    ''', [search_query, search_query])
@@ -115,7 +115,7 @@ def search(request):
                     all_searches.append(i)
 
                 all_shows_with_query1 = Show.objects.raw('''
-                           SELECT id,titleName , LOCATE(%s,storyLine)
+                           SELECT *, EXTRACT(YEAR FROM releaseDate) AS year,LOCATE(%s,storyLine)
                            FROM show_show
                            WHERE locate(%s,storyLine)>0;
                    ''', [search_query, search_query])
@@ -142,7 +142,7 @@ def search(request):
 
             else:
                 all_shows_with_query = cast.objects.raw('''
-                               SELECT id,name , LOCATE(%s,name)
+                               SELECT *, LOCATE(%s,name)
                                FROM cast_cast
                                WHERE locate(%s,name)>0;
                    ''', [search_query, search_query])

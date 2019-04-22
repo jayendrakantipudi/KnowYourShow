@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <style>
+<style>
 .button {
   background-color:  deepskyblue;
   border: none;
@@ -119,23 +119,40 @@
 </nav>
 
 {% if key %}
-<div style="margin:10%">
-<h1 >Search Results for "{{search_query}}"</h1>
-{% for result in all_searches %}
-    <div style="margin:30px;float:left;padding:1%">
+
+<br><br>
+<div class="container">
+  <div class="row">
+  <h1 >Search Results for "{{search_query}}"</h1>
+</div><br><br>
+  <div class="row">
+    {% if all_searches %}
+    <div class="col-md-12">
+      <h2>Movies</h2>
+    </div>
+
+  {% for result in all_searches %}
+    <div class="col-md-3">
         <a href="{% url 'show:movie' result.id %}" class="link">
-            <div><img src="/media/{{ result.titlePoster1 }}" width="180px" height="250px"></div>
-            <div>{{ result.titleName }}</div><br>
+        <div><img src="/media/{{ result.titlePoster1 }}" width="180px" height="250px"></div>
+        <div>{{ result.titleName }}<br>({{result.year}})</div>
         </a>
     </div>
-{% endfor %}
-{% for result in all_shows_with_query %}
-    <div style="margin:30px;float:left;padding:1%">
-        <a href="{% url 'cast:CAST' result.id %}" class="link"><div><img src="/media/{{ result.photo }}" width="180px" height="250px"></div>
-            <div>{{ result.name }}</div>
-        </a><br>
+  {% endfor %}
+  {% endif %}<br>
+  {% if all_shows_with_query %}
+  <div class="col-md-12">
+    <h2>Cast</h2>
+  </div>
+  {% for result in all_shows_with_query %}
+      <div class="col-md-3">
+      <a href="{% url 'cast:CAST' result.id %}" class="link"><div><img src="/media/{{ result.photo }}" width="180px" height="250px"></div>
+        <div>{{ result.name }}</div>
+      </a><br>
     </div>
-{% endfor %}
+  {% endfor %}
+  {% endif %}
+</div>
 </div>
 {% else %}
     <h1>RESULT NOT FOUND</h1><br>

@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 {% block content %}
 <br><br>
-<div class="container background-container" style="color:white;">
+<div class="container background-container">
   <div class="row">
     <div class="col-md-10 heading">
       <h1>{{show.titleName}}&nbsp({{show.year}})</h1>
@@ -59,10 +59,10 @@
     {% endfor %}
   </div><br><br>
   <div class="row">
-    <div class="col-md-6 heading">
-      <h3>Review & Ratings</h3>
+    <div class="col-md-5 heading">
+      <h3>Reviews & Ratings</h3>
       </div>
-    <div class="col-md-6 heading rate_btn">
+    <div class="col-md-5 heading rate_btn">
         {% if user.is_authenticated %}
                 {% if user_rated %}
         <button class="button" data-toggle="modal" data-target="#myModal">Already Rated</button>
@@ -74,24 +74,44 @@
         {% endif %}
 
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <b  style="color:#FFD700;">KYS Rating</b> : {% if RATING_INFO %}<b>{{KYSrating}}</b>({{total_reviews}}){% else %}<b>Not Rated Yet</b>  {% endif %}
-    </div>
   </div><br>
   <div class="row">
-    {% for review in reviews %}
-    <div class="col-md-12">
-      {{review.username}}<br>
-      -------------------<br>
-      <b  style="color:#FFD700;">Rating</b> : {{review.rating}}/5 <br>
-      <b  style="color:#FFD700;">Review</b> : {{review.Review}}<br><br><br><br>
+    <div class="col-md-10">
+      <b  style="color:deepskyblue;">KYS Rating</b> : {% if RATING_INFO %}<b>{{KYSrating}}</b>/5({{total_reviews}}){% else %}<b>Not Rated Yet</b>  {% endif %}
     </div>
-    {% endfor %}
+  </div><br>
+  {% if currentUser_review %}
+  <div class="row">
+    <div class="col-md-10">
+      <img src="{% static 'login-user-icon.png' %}" alt="no-image" width="50px" height="40px">
+      <b style="color:deepskyblue;font-size:20px;">{{currentUser_review.username}}</b>&nbsp &nbsp
+      <span style="font-size:15px"><i>{{currentUser_review.date_reviewed}}</i></span>&nbsp&nbsp
+      {% if currentUser_review.edited %}<span style="color:gray"><i>(edited)</i></span>{% endif %}<br>
+      <b style="color:deepskyblue;">Rating</b>&nbsp : {{currentUser_review.rating}}/5 <br>
+    </div>
+    <div class="col-md-10">
+      <b style="color:deepskyblue;">Review</b> : {{currentUser_review.Review}}<br><br><br><br>
+    </div>
   </div>
+  {% endif %}
+  {% for review in reviews %}
+    {% if review.id is not currentUser_review.id %}
+    <div class="row">
+      <div class="col-md-10">
+        <img src="{% static 'login-user-icon.png' %}" alt="no-image" width="50px" height="40px">
+        <b style="color:deepskyblue;font-size:20px;">{{review.username}}</b>&nbsp &nbsp
+        <span style="font-size:15px"><i>{{review.date_reviewed}}</i></span>&nbsp&nbsp
+        {% if review.edited %}<span style="color:gray"><i>(edited)</i></span>{% endif %}<br>
+        <b style="color:deepskyblue;">Rating</b>&nbsp : {{review.rating}}/5 <br>
+      </div>
+      <div class="col-md-10">
+        <b style="color:deepskyblue;">Review</b> : {{review.Review}}<br><br><br><br>
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
 </div>
-
+<br><br>
 
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -106,6 +126,10 @@
 
                       <label for="" class="modal-sub">Rate&nbsp &nbsp</label>
                       <select name="rating">
+                        {% if currentUser_review %}
+                        <option value="{{currentUser_review.rating}}">{{currentUser_review.rating}}</option>
+                        <option value="{{currentUser_review.rating}}">----</option>
+                        {% endif %}
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -113,7 +137,7 @@
                         <option value="5">5</option>
                       </select><br>
                       <label for="" class="modal-sub">Review</label>
-                      <textarea id="Review" rows="5" cols="100" style="resize:none;overflow:auto;" name="Review"></textarea>
+                      <textarea id="Review" rows="5" cols="100" style="resize:none;overflow:auto;" name="Review">{{currentUser_review.Review}}</textarea>
                   </div>
         <div class="modal-footer">
           <input type="submit" class="btn btn-success" style="margin-left: 500px;">
@@ -122,7 +146,6 @@
         </div>
       </div>
       </div>
-
 
 
 

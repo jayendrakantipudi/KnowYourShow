@@ -40,8 +40,7 @@ def seasonpage(request, series_id, season_id):
     ''', [series_id, season_id])
     tvshow = TVShow.objects.raw('''
             SELECT * FROM tvshow_tvshow
-            WHERE id = %s
-            ;
+            WHERE id =%s;
     ''', [series_id,])
     context = {'episodes' : episodes, 'tvshow' : tvshow[0], 'season_id' : season_id,}
     return render(request, 'tvshow/season_page.html', context)
@@ -62,15 +61,15 @@ def episodepage(request, series_id, season_id, episodeNum):
     episode = TVShow.objects.raw('''
             SELECT * FROM tvshow_episode
             WHERE id in (SELECT id FROM tvshow_episode WHERE series_id=%s AND season_id = %s AND episodeNum = %s )
-            ; 
+            ;
     ''', [series_id, season_id, episodeNum])
 
     cast = Show.objects.raw('''
             SELECT * FROM cast_cast
-            WHERE id in (SELECT cast_id FROM tvshow_episode_cast WHERE episode_id in 
-                                                                    (SELECT id FROM tvshow_episode WHERE episodeNum=%s)                                                                       
+            WHERE id in (SELECT cast_id FROM tvshow_episode_cast WHERE episode_id in
+                                                                    (SELECT id FROM tvshow_episode WHERE episodeNum=%s)
             )
-            
+
     ''', [episodeNum])
     context = {'episode' : episode[0], 'series' : series[0], 'season': season[0],'cast':cast}
     return render(request, 'tvshow/episode_page.html', context)

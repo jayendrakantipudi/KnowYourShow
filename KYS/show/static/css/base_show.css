@@ -7,7 +7,7 @@ body{
 }
 
 .heading{
-  border-bottom:1px solid white;
+  border-bottom:1px solid black;
 }
 
 .link{
@@ -16,7 +16,7 @@ body{
   font-size: 25px;
 }
 .link:hover{
-  color: #FFD700;
+  color: deepskyblue;
   text-decoration: none;
 }
 
@@ -40,7 +40,7 @@ textarea {
 .button {
   background-color: black;
   border: none;
-  color: #ffc119;
+  color: deepskyblue;
   padding: 9px 20px;
   text-align: center;
   text-decoration: none;
@@ -48,11 +48,11 @@ textarea {
   font-size: 16px;
   margin: 3px 0.5px;
   cursor: pointer;
-  border:1px solid #ffc119;
+  border:1px solid deepskyblue;
 }
 
 .button:hover{
-  background-color:  #ffc119;
+  background-color:  deepskyblue;
   color:black;
 }
 

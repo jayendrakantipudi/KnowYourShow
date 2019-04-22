@@ -1,7 +1,8 @@
 from django.db import models
 from cast.models import cast, director, producer
 from django.contrib.auth.models import User
-
+from datetime import datetime
+from django.utils.timezone import now
 # Create your models here.
 
 class language(models.Model):
@@ -20,6 +21,8 @@ class review(models.Model):
 	show = models.ForeignKey('show', on_delete=models.SET_NULL,blank=True ,null=True)
 	rating = models.IntegerField(null=True)
 	Review = models.CharField(max_length=1000)
+	edited = models.BooleanField(default=False)
+	date_reviewed = models.DateField(blank=True, default=now)
 
 class Show(models.Model):
 	titleName = models.CharField(max_length=120)
