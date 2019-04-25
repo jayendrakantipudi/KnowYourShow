@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cast',
     'show',
-    'users',
     'tvshow',
+    'accounts',
     'widget_tweaks',
     'crispy_forms',
 ]
@@ -111,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Internationalization

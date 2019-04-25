@@ -1,33 +1,22 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from .forms import SignUpForm
+from .forms import RegisterForm
+
+
 
 def signup(request):
-    # Create your views here.
-    if request.method=='POST':
-        print(1)
-        form=SignUpForm(request.POST,request.FILES)
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
         if form.is_valid():
-
-            username=form.cleaned_data.get('username')
-            print(username)
-            raw_password=form.cleaned_data.get('password1')
-            print(raw_password)
-            new_user = form.save(commit=False)
-            new_user.is_active=False
-            new_user.save()
-            new_user.refresh_from_db()  # load the profile instance created by the signal
-            new_user.save()
-            age = form.cleaned_data.get('age')
-            picture = form.cleaned_data.get('picture')
-            Profile=Profile()
-            Profile.user = new_user
-            if picture:
-                Profile.picture = picture
-            Profile.age=age
-            Profile.save()
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
+            form.save()
+            # age=request.POST['age']
+            # print(age)
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
+            
+            return redirect('/')
     else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+        form = RegisterForm()
+    return render(request, 'accounts/signup.html', {'form': form})
