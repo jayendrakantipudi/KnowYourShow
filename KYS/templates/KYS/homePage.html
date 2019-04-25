@@ -15,48 +15,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style media="screen">
-    #image{
-      width:90%;
-      height:120px;
-      margin-bottom:0px;
-    }
-    .navbar-nav > li{
-      padding-left:30px;
-      padding-right:30px;
-    }
-
-
-    #id_search_query,#id_search_ty{
-      padding-left:20px;
-      padding-right:20px;
-    }
-    #searchb{
-      /* padding-left:20px; */
-      margin-left: 10px;
-      background-color:#ffc119;
-      color:black;
-    }
-    #id_search_ty{
-      border-radius:5px;
-      background: #ffc119;
-    }
-    #id_search_ty > option{
-      background-color: white;
-      font-size: 20px;
-      background: #ffc119;
-    }
-    #searchb2{
-      margin-left:100px;
-    }
 
     </style>
   </head>
-  <body style="background-color:black;">
-
-
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-black" style="padding:0px;">
-  <a class="navbar-brand" href="#" style="padding:0px;"><img src="{% static 'logo5.png' %}"  alt="No logo" id="image"></a>
+  <body  style="background-image: url({% static 'wallpaper.jpg' %});background-repeat:no-repeat;background-size: 100%;background-attachment: fixed">
+  <nav class="navbar navbar-expand-lg navbar-light bg-black" style="padding:0px;background-color: black;position: relative;">
+  <a class="navbar-brand" href="{% url 'mainpage' %}" style="padding:0px;width:15%"><img src="{% static 'logo.png' %}"  alt="No logo" id="image"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -64,14 +28,14 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><b class="text-warning ">Home</b> <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#"><b style="color:deepskyblue">Home</b> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#"><b class="text-warning ">About Us</b></a>
+        <a class="nav-link" href="#"><b style="color:deepskyblue">About Us</b></a>
       </li>
       <li class="nav-item dropdown " >
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <b class="text-warning"><span class="glyphicon glyphicon-filter"></span>Filter</b>
+          <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"></span>Filter</b>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Action</a>
@@ -92,39 +56,33 @@
       });
       </script>
       <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-      <button class="btn btn-success btn-mid" id="searchb" type="submit">Search</button>
-
+      <button class="button" type="submit">Search</button>
+    </form>
         {% if user.is_authenticated %}
-          <a class="btn btn-success btn-mid" id="searchb2" href="{% url 'logout' %}">Logout</a>
+          <a class="button button_log"  href="{% url 'logout' %}">Logout</a>
           {% else %}
-          <a class="btn btn-success btn-mid" id="searchb2" href="{% url 'login' %}">Login</a>
+          <a class="button button_log" href="{% url 'login' %}">Login</a>
         {% endif %}
       </a>
-    </form>
+
   </div>
 </nav>
-<hr style="border: 2px solid #ffc119 ;">
-
+<br>
 {% block content %}
 
-<div id="demo" class="carousel slide" data-ride="carousel" style="height:300px">
+<div id="demo" class="carousel slide" data-ride="carousel" >
 
   <!-- Indicators -->
   <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
+
+    <li data-target="#demo" data-slide-to="1" class="active"></li>
     <li data-target="#demo" data-slide-to="2"></li>
     <li data-target="#demo" data-slide-to="3"></li>
   </ul>
 
   <!-- The slideshow -->
   <div class="carousel-inner">
-    <div class="carousel-item active" >
-
-        <img class="mx-auto" src="{% static 'image.jpg' %}" alt="Los Angeles" style="width:100%" height="300px">
-
-    </div>
-    <div class="carousel-item">
+    <div class="carousel-item active">
       <img src="{% static 'image1.jpg' %}" alt="Chicago" style="width:100%" height="300px">
     </div>
     <div class="carousel-item">
@@ -143,37 +101,120 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div><br><br>
-<div class="container-fluid" style="color:white;">
+
+<div class="container-fluid" ">
+
+<br><br>
+  {% for list_name,list in list_of_movies %}
     <div class="row">
         <div class="col-md-12 heading">
-          <h2 style="margin-left: 25px;">Movies</h2>
+          <h2 style="margin-left: 25px;">{{ list_name }}</h2>
         </div>
     </div>
+
     <div class="row">
-        {% for movie in movies %}
+        {% for movie in list %}
         <div class="col-md-2" style="text-align: center;">
           <a href="{% url 'show:movie' movie.id %}" class="link">
-            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">
-          </a><br>
-          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>
+              <img src="{% static 'Layer 1.png' %}" style="position: absolute">
+              <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px" style="position: relative;top:53.5px;left:40px">
+          </a>
+{#         <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
         </div>
         {% endfor %}
-    </div><br><br><br>
-    <div class="row">
-        <div class="col-md-12 heading">
-          <h2 style="margin-left: 25px;">Telugu Movies</h2>
-        </div>
-    </div>
-    <div class="row">
-        {% for movie in movies_telugu %}
-        <div class="col-md-2" style="text-align: center;">
-          <a href="{% url 'show:movie' movie.id %}" class="link">
-            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">
-          </a><br>
-          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>
-        </div>
-        {% endfor %}
-    </div>
+
+    </div><br><br><br><br><br>
+{% endfor %}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Telugu Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_telugu %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">English Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_english %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Tamil Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_tamil %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Malyalam Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_malyalam %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Hindi Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_hindi %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div><br><br><br>#}
+{#    <div class="row">#}
+{#        <div class="col-md-12 heading">#}
+{#          <h2 style="margin-left: 25px;">Horror Movies</h2>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        {% for movie in movies_horror %}#}
+{#        <div class="col-md-2" style="text-align: center;">#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
+{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
+{#          </a><br>#}
+{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
 </div>
 {% endblock content %}
 

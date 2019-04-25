@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('',include('show.urls')),
     path('',include('cast.urls')),
+    path('',include('tvshow.urls'))
 ]
 
 if settings.DEBUG:

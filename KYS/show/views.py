@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.utils.datastructures import MultiValueDictKeyError
 from .forms import genreForm,languageForm,show_update_form
+from django.contrib.auth.decorators import login_required
 from django.db import connection
 from .models import language
 from KYS.forms import search_bar
@@ -9,6 +11,13 @@ from cast.models import cast
 # Create your views here.
 
 def movie(request,id):
+    user_rated = True
+    user_review = Show.objects.raw('''
+        SELECT * FROM show_review
+        WHERE reviewer_id=%s AND show_id=%s;
+    ''',[request.user.id,id])
+    if not len(user_review):
+        user_rated = False
     if request.method == 'POST':
         form = search_bar(request.POST)
         if form.is_valid():
@@ -18,7 +27,7 @@ def movie(request,id):
             all_searches = []
             if search_ty == 'movies':
                 all_shows_with_query = Show.objects.raw('''
-                            SELECT id,titleName , LOCATE(%s,titleName)
+                            SELECT *,EXTRACT(YEAR FROM releaseDate) AS year, LOCATE(%s,titleName)
                             FROM show_show
                             WHERE locate(%s,titleName)>0;
                 ''',[search_query,search_query])
@@ -28,7 +37,7 @@ def movie(request,id):
 
 
                 all_shows_with_query1 = Show.objects.raw('''
-                        SELECT id,titleName , LOCATE(%s,storyLine)
+                        SELECT *, EXTRACT(YEAR FROM releaseDate) AS year,LOCATE(%s,storyLine)
                         FROM show_show
                         WHERE locate(%s,storyLine)>0;
                 ''',[search_query,search_query])
@@ -42,7 +51,7 @@ def movie(request,id):
                     print(i)
             else:
                 all_shows_with_query = cast.objects.raw('''
-                            SELECT id,name , LOCATE(%s,name)
+                            SELECT *, EXTRACT(YEAR FROM releaseDate) AS year,LOCATE(%s,name)
                             FROM cast_cast
                             WHERE locate(%s,name)>0;
                 ''',[search_query,search_query])
@@ -79,16 +88,189 @@ def movie(request,id):
         SELECT * FROM cast_producer
         WHERE id in (SELECT producer_id FROM show_show_producer WHERE show_id=%s);
     ''',[id])
-    context = {
-        'show':movies[0],
-        'search_form':form,
-        'cast':castActed,
-        'Genres' : genres,
-        'Languages':langs,
-        'Directors':directors,
-        'Producers':producers,
-    }
+    reviews = Show.objects.raw('''
+        SELECT *,username FROM show_review,auth_user
+        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id
+        ORDER BY date_reviewed;
+    ''',[id])
+    avgRating =Show.objects.raw('''
+        SELECT id,AVG(rating) AS KYSavg,COUNT(*) AS total FROM show_review
+        WHERE show_id = %s;
+    ''',[id])
+    currentUser_review = Show.objects.raw('''
+        SELECT *,username FROM show_review,auth_user
+        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id AND show_review.reviewer_id=%s;
+    ''',[id,request.user.id])
+    if reviews:
+        RATING_INFO = True
+        total_rating = round(avgRating[0].KYSavg,2)
+    else:
+        RATING_INFO = False
+        total_rating = 0
+
+    if not currentUser_review:
+        context = {
+            'show':movies[0],
+            'search_form':form,
+            'cast':castActed,
+            'Genres' : genres,
+            'Languages':langs,
+            'reviews':reviews,
+            'Directors':directors,
+            'total_reviews':len(reviews),
+            'Producers':producers,
+            'user_rated':user_rated,
+            'RATING_INFO': RATING_INFO,
+            'KYSrating':total_rating,
+        }
+    else:
+
+        context = {
+            'show':movies[0],
+            'search_form':form,
+            'cast':castActed,
+            'Genres' : genres,
+            'Languages':langs,
+            'reviews':reviews,
+            'Directors':directors,
+            'Producers':producers,
+            'user_rated':user_rated,
+            'total_reviews':len(reviews),
+            'currentUser_review':currentUser_review[0],
+            'RATING_INFO': RATING_INFO,
+            'KYSrating': total_rating,
+        }
     return render(request,'show/movie.html',context)
+
+
+@login_required(login_url='/accounts/login/')
+def review_rate(request,id):
+    if request.method == 'POST':
+        try:
+            Review = request.POST['Review']
+        except MultiValueDictKeyError:
+            Review = False
+        try:
+            rating = request.POST['rating']
+        except MultiValueDictKeyError:
+            rating = False
+        user_review = Show.objects.raw('''
+            SELECT * FROM show_review
+            WHERE reviewer_id=%s AND show_id=%s;
+        ''',[request.user.id,id])
+        if not user_review:
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                    INSERT INTO show_review (rating,Review,reviewer_id,show_id,date_reviewed,edited)
+                    VALUES(%s,%s,%s,%s,CURRENT_TIMESTAMP,False);
+                ''',[rating,Review,request.user.id,id,])
+        elif Review != False and rating != False and (user_review[0].Review != Review  or user_review[0].rating != int(rating)):
+            print()
+            print()
+            print(type(user_review[0].rating))
+            print(type(rating))
+            print(user_review[0].rating is not int(rating))
+            print()
+            print()
+
+
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                    UPDATE show_review
+                    SET rating=%s,Review=%s,edited=True
+                    WHERE reviewer_id=%s AND show_id=%s;
+                ''',[rating,Review,request.user.id,id])
+        else:
+            print("hello")
+    movies = Show.objects.raw('''
+        SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
+        WHERE id=%s
+        ;
+    ''',[id,])
+
+    form = search_bar()
+
+    user_rated = True
+    user_review = Show.objects.raw('''
+        SELECT * FROM show_review
+        WHERE reviewer_id=%s AND show_id=%s;
+    ''',[request.user.id,id])
+    if not len(user_review):
+        user_rated = False
+
+    castActed = Show.objects.raw('''
+        SELECT * FROM cast_cast
+        WHERE id in (SELECT cast_id FROM show_show_cast WHERE show_id=%s);
+        ;
+    ''',[id])
+    langs = Show.objects.raw('''
+        SELECT * FROM show_language
+        WHERE id in (SELECT language_id FROM show_show_language WHERE show_id=%s);
+        ;
+    ''',[id])
+    genres = Show.objects.raw('''
+        SELECT * FROM show_GENRE
+        WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
+        ;
+    ''',[id])
+    directors = cast.objects.raw('''
+        SELECT * FROM cast_director
+        WHERE id in (SELECT director_id FROM show_show_director WHERE show_id=%s);
+    ''',[id])
+    producers = cast.objects.raw('''
+        SELECT * FROM cast_producer
+        WHERE id in (SELECT producer_id FROM show_show_producer WHERE show_id=%s);
+    ''',[id])
+    reviews = Show.objects.raw('''
+        SELECT *,username FROM show_review,auth_user
+        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id
+        ORDER BY date_reviewed;
+    ''',[id])
+
+    avgRating =Show.objects.raw('''
+        SELECT id,AVG(rating) AS KYSavg,COUNT(*) AS total FROM show_review
+        WHERE show_id = %s;
+    ''',[id])
+    currentUser_review = Show.objects.raw('''
+        SELECT *,username FROM show_review,auth_user
+        WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id AND show_review.reviewer_id=%s;
+    ''',[id,request.user.id])
+
+    if not currentUser_review:
+        context = {
+            'show':movies[0],
+            'search_form':form,
+            'cast':castActed,
+            'Genres' : genres,
+            'Languages':langs,
+            'reviews':reviews,
+            'Directors':directors,
+            'Producers':producers,
+            'user_rated':user_rated,
+            'RATING_INFO': False,
+        }
+    else:
+        total_rating = round(avgRating[0].KYSavg,2)
+        context = {
+            'show':movies[0],
+            'search_form':form,
+            'cast':castActed,
+            'Genres' : genres,
+            'Languages':langs,
+            'reviews':reviews,
+            'Directors':directors,
+            'Producers':producers,
+            'user_rated':user_rated,
+            'currentUser_review':currentUser_review[0],
+            'total_reviews':avgRating[0].total,
+            'RATING_INFO': True,
+            'KYSrating': total_rating,
+            'user_review':currentUser_review[0],
+        }
+    return render(request,'show/movie.html',context)
+
+
+
 
 def language_form(request):
     if request.method == 'POST':

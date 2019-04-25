@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cast',
     'show',
-    'accounts',
+    'users',
+    'tvshow',
     'widget_tweaks',
     'crispy_forms',
 ]

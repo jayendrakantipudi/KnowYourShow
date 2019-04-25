@@ -1,15 +1,33 @@
-body{
-  background-color: black;
-}
-
 .link{
   text-decoration: none;
   color: white;
   font-size: 25px;
 }
 .link:hover{
-  color: #FFD700;
+  color: deepskyblue;
   text-decoration: none;
+}
+
+.button {
+  background-color:  deepskyblue;
+  border: none;
+  color: black;
+  padding: 9px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px 0.5px;
+  cursor: pointer;
+}
+.button:hover{
+  background-color: #ffc119;
+  text-decoration: none;
+  color:black;
+}
+
+.button_log{
+  margin-left:100px;
 }
 
 .field_name{
@@ -52,6 +70,40 @@ body{
     font-size: 18px;
   }
   .create_acc_login:hover{
-    color: #FFD700;
+    color: deepskyblue;
     text-decoration: none;
+  }
+
+  #image{
+    width:90%;
+    height:120px;
+    margin-bottom:0px;
+  }
+  .navbar-nav > li{
+    padding-left:30px;
+    padding-right:30px;
+  }
+
+
+  #id_search_query,#id_search_ty{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  #searchb{
+    /* padding-left:20px; */
+    margin-left: 10px;
+    background-color:deepskyblue;
+    color:black;
+  }
+  #id_search_ty{
+    /* border-radius:5px; */
+    background: deepskyblue;
+  }
+  #id_search_ty > option{
+    background-color: white;
+    font-size: 20px;
+    background: deepskyblue;
+  }
+  #searchb2{
+    margin-left:100px;
   }

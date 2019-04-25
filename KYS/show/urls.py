@@ -10,6 +10,7 @@ urlpatterns = [
     path("language",views.language_form),
     path("genre",views.genre_form),
     path("movie/<int:id>/",views.movie,name='movie'),
+    path("reviews/<id>/",views.review_rate,name='review_rate'),
 ]
 
 
