@@ -3,16 +3,16 @@
 {% load widget_tweaks %}
 {% block content %}
 <br><br>
-<div class="container background-container">
+<div class="container-fluid background-container" style="margin-left:50px;">
   <div class="row">
-    <div class="col-md-10 heading">
+    <div class="col-md-8 heading">
       <h1>{{show.titleName}}&nbsp({{show.year}})</h1>
     </div>
 
   </div><br>
   <div class="row">
-    <div class="col-md-6"><img src="/media/{{show.titlePoster}}" width="500px" height="300px"></div>
-    <div class="col-md-4">
+    <div class="col-md-5"><img src="/media/{{show.titlePoster}}" width="500px" height="300px"></div>
+    <div class="col-md-3">
       <b style="color:deepskyblue;">Directed By</b> :
       {% for director in Directors %}
         <a href="{% url 'cast:Director' director.id %}">{{director.name}}</a>&nbsp
@@ -41,12 +41,12 @@
     </div>
   </div><br>
   <div class="row">
-    <div class="col-md-9" id="b">
+    <div class="col-md-8" id="b">
         <b style="color:deepskyblue;">Movie Plot</b> : {{show.storyLine}}
     </div><a href='javascript:;' id="c" onclick="reveal()">see more</a>
   </div> <a href="javascript:;" id="d" onclick="showless()" style="display:none">See less</a><br><br><br>
   <div class="row">
-    <div class="col-md-10 heading">
+    <div class="col-md-8 heading">
       <h3>Cast & Crew</h3>
     </div>
   </div><br>
@@ -59,10 +59,10 @@
     {% endfor %}
   </div><br><br>
   <div class="row">
-    <div class="col-md-5 heading">
+    <div class="col-md-4 heading">
       <h3>Reviews & Ratings</h3>
       </div>
-    <div class="col-md-5 heading rate_btn">
+    <div class="col-md-4 heading rate_btn">
         {% if user.is_authenticated %}
                 {% if user_rated %}
         <button class="button" data-toggle="modal" data-target="#myModal">Already Rated</button>
@@ -76,20 +76,20 @@
     </div>
   </div><br>
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-8">
       <b  style="color:deepskyblue;">KYS Rating</b> : {% if RATING_INFO %}<b>{{KYSrating}}</b>/5({{total_reviews}}){% else %}<b>Not Rated Yet</b>  {% endif %}
     </div>
   </div><br>
   {% if currentUser_review %}
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-8">
       <img src="{% static 'login-user-icon.png' %}" alt="no-image" width="50px" height="40px">
       <b style="color:deepskyblue;font-size:20px;">{{currentUser_review.username}}</b>&nbsp &nbsp
       <span style="font-size:15px"><i>{{currentUser_review.date_reviewed}}</i></span>&nbsp&nbsp
       {% if currentUser_review.edited %}<span style="color:gray"><i>(edited)</i></span>{% endif %}<br>
       <b style="color:deepskyblue;">Rating</b>&nbsp : {{currentUser_review.rating}}/5 <br>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-8">
       <b style="color:deepskyblue;">Review</b> : {{currentUser_review.Review}}<br><br><br><br>
     </div>
   </div>
@@ -97,14 +97,14 @@
   {% for review in reviews %}
     {% if review.id is not currentUser_review.id %}
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-8">
         <img src="{% static 'login-user-icon.png' %}" alt="no-image" width="50px" height="40px">
         <b style="color:deepskyblue;font-size:20px;">{{review.username}}</b>&nbsp &nbsp
         <span style="font-size:15px"><i>{{review.date_reviewed}}</i></span>&nbsp&nbsp
         {% if review.edited %}<span style="color:gray"><i>(edited)</i></span>{% endif %}<br>
         <b style="color:deepskyblue;">Rating</b>&nbsp : {{review.rating}}/5 <br>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-8">
         <b style="color:deepskyblue;">Review</b> : {{review.Review}}<br><br><br><br>
       </div>
     </div>

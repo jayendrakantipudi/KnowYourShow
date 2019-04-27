@@ -4,51 +4,99 @@
 <html lang="en" dir="ltr">
   <head>
       <style>
-.button {
-  background-color:  deepskyblue;
-  border: none;
-  color: black;
-  padding: 9px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 3px 0.5px;
-  cursor: pointer;
-}
- #image{
-    width:90%;
-    height:120px;
-    margin-bottom:0px;
-  }
-  .navbar-nav > li{
-    padding-left:30px;
-    padding-right:30px;
-  }
 
 
-  #id_search_query,#id_search_ty{
-    padding-left:20px;
-    padding-right:20px;
-  }
-  #searchb{
-    /* padding-left:20px; */
-    margin-left: 10px;
-    background-color:deepskyblue;
-    color:black;
-  }
-  #id_search_ty{
-    /* border-radius:5px; */
-    background: deepskyblue;
-  }
-  #id_search_ty > option{
-    background-color: white;
-    font-size: 20px;
-    background: deepskyblue;
-  }
-  #searchb2{
-    margin-left:100px;
-  }
+            .button {
+              border: 1px solid deepskyblue;
+              color: deepskyblue;
+              padding: 8.2px 20px;
+              background-color: black;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 3px 0.5px;
+              cursor: pointer;
+            }
+            .button:hover{
+              background-color: deepskyblue;
+              text-decoration: none;
+              color:black;
+            }
+
+
+
+            .button1 {
+              /* border: none; */
+              border: 1px solid deepskyblue;
+              color: deepskyblue;
+              padding: 8.2px 20px;
+              text-align: center;
+              text-decoration: none;
+              background-color: black;
+              display: inline-block;
+              font-size: 16px;
+              margin: 3px 0.5px;
+              cursor: pointer;
+            }
+
+            .button1:hover{
+              background-color: deepskyblue;
+              text-decoration: none;
+              color:black;
+            }
+            /* .button_log1{
+              margin-left:10px;
+            } */
+
+
+
+
+              #image{
+                width:90%;
+                height:120px;
+                margin-bottom:0px;
+              }
+              .navbar-nav > li{
+                padding-left:30px;
+                padding-right:30px;
+              }
+
+
+              #id_search_query{
+                padding: 8.72px 20px;
+                background-color: black;
+                color: deepskyblue;
+                border: none;
+                border-bottom: 1px solid deepskyblue;
+                border-radius: 0px;
+                width:150px;
+                -webkit-transition: width 0.5s; /* Safari */
+                transition: width 0.5s;
+              }
+              #id_search_query:focus{
+                box-shadow: 0px 0px 0px black;
+                width: 300px;
+              }
+
+
+
+
+
+              #id_search_ty{
+                padding: 9px 20px;
+              }
+              #id_search_ty{
+                background: deepskyblue;
+                border: none;
+              }
+              #id_search_ty > option{
+                background-color: white;
+                font-size: 20px;
+              }
+              #searchb2{
+                margin-left:100px;
+              }
 
           div#b {
     white-space: nowrap;
@@ -72,69 +120,72 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-black" style="padding:0px;background-color: black;position: relative;">
-  <a class="navbar-brand" href="{% url 'mainpage' %}" style="padding:0px;width:15%"><img src="{% static 'logo.png' %}"  alt="No logo" id="image"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<a class="navbar-brand" href="{% url 'mainpage' %}" style="padding:0px;width:15%"><img src="{% static 'logo.png' %}"  alt="No logo" id="image"></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ">
-      <li class="nav-item active">
-        <a class="nav-link" href="#"><b style="color:deepskyblue">Home</b> <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#"><b style="color:deepskyblue">About Us</b></a>
-      </li>
-      <li class="nav-item dropdown " >
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"></span>Filter</b>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0" action='{% url 'search' %}' method="POST">
-      {% csrf_token %}
-      {{ search_form }}
-      <script type="text/javascript">
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav ">
+    <li class="nav-item active">
+      <a class="nav-link" href="#"><b style="color:deepskyblue">Home</b> <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="#"><b style="color:deepskyblue">About Us</b></a>
+    </li>
+    <li class="nav-item dropdown " >
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"></span>Filter</b>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </li>
+
+  </ul>
+  <form class="form-inline" action='{% url 'search' %}' method="post">
+    {% csrf_token %}
+    {{ search_form.search_ty }} &nbsp&nbsp&nbsp&nbsp&nbsp
+    {{ search_form.search_query }}
+    <script type="text/javascript">
+
     $(function () {
       $('#id_search_query').addClass('form-control mr-sm-2').attr("placeholder", "Search");
       $('#id_search_ty').addClass('nav-link dropdown-toggle ').attr("data-toggle","dropdown").attr("aria-haspopup","true").attr("aria-expanded","false");
     });
-
-    $('.thumbnail').click(function(){
-    	$('.modal-body').empty();
-    	var title = $(this).parent('a').attr("title");
-    	$('.modal-title').html(title);
-    	$($(this).parents('div').html()).appendTo('.modal-body');
-    	$('#myModal').modal({show:true});
-  });
-
-  /* blur on modal open, unblur on close */
-  $('#myModal').on('show.bs.modal', function () {
-     $('.col-6,.row .thumbnail').addClass('blur');
-  })
-
-  $('#myModal').on('hide.bs.modal', function () {
-     $('.col-6,.row .thumbnail').removeClass('blur');
-  })
     </script>
     <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-    <!-- <button class="button"  type="submit">Search</button> -->
-      <button class="button" style="background-color: deepskyblue" type="submit">Search</button>
+    <!-- <input type="submit" class="button1 button_log1"><i class="fa fa-search"></i></input> -->
+    <!-- <button type="submit" class="button1 button_log1"><i class="fa fa-search"></button> -->
 
-        {% if user.is_authenticated %}
-          <a class="button button_log" style="color: deepskyblue" href="{% url 'logout' %}">Logout</a>
-          {% else %}
-          <a class="button button_log" style="background-color: deepskyblue" href="{% url 'login' %}">Login</a>
-        {% endif %}
-      </a>
-    </form>
+  </form>
+
+
+
+</div>
+{% if user.is_authenticated %}
+<div class="nav-item dropdown" style="margin-right:120px;">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"></span><i class="fa fa-user-circle-o" style="font-size:40px"></i></b>
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="#">Profile</a>
+    <a class="dropdown-item" href="#">Your Reviews</a>
+    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
   </div>
+</div>
+{% else %}
+<div class="nav-item" style="margin-right:10px;">
+<button class="button button_log" href="{% url 'login' %}">Login</button>
+<button class="button button_log" style="margin-right:100px;" href="{% url 'accounts:signup' %}">Sign Up</button>
+</div>
+
+{% endif %}
+
 </nav>
 <!-- <hr style="border: 2px solid #ffc119 ;"> -->
 {% block content%}

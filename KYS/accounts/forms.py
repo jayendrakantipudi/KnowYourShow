@@ -5,6 +5,8 @@ from .models import Profile
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
+    first_name = forms.CharField()
+    last_name = forms.CharField()
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
 
@@ -13,7 +15,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username','first_name','last_name', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

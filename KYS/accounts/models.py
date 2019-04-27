@@ -7,10 +7,4 @@ from django.dispatch import receiver
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True)
 	age  = models.IntegerField(null=True)
-	#profilePic = models.ImageField(null=True, blank=True)
-
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
+	# profilePic = models.ImageField(null=True, blank=True)
