@@ -5,9 +5,15 @@ body{
   background-repeat: no-repeat;
   background-size: 100%;
 }
-
+.border{
+  border-left: 2px solid black;
+}
 .heading{
   border-bottom:1px solid black;
+}
+.heading1{
+  border-bottom:1px solid black;
+  width:75%;
 }
 
 .link{

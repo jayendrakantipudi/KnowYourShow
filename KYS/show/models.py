@@ -32,6 +32,7 @@ class Show(models.Model):
 	language = models.ManyToManyField(language)
 	storyLine = models.CharField(max_length=2500)
 	budget = models.FloatField(null=True)
+	suggested_count = models.IntegerField(default=0)
 	BoxOfficeCollection = models.FloatField(null=True)
 	GENRE = models.ManyToManyField(GENRE)
 	titlePoster = models.ImageField(upload_to='movie_posters',blank=True)

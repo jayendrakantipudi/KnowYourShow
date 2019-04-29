@@ -176,15 +176,14 @@
   </div>
   {% else %}
   <div class="nav-item" style="margin-right:10px;">
-  <button class="button button_log" href="{% url 'login' %}">Login</button>
-  <button class="button button_log" style="margin-right:100px;" href="{% url 'accounts:signup' %}">Sign Up</button>
+  <a class="button button_log" href="{% url 'login' %}">Login</a>
+  <a class="button button_log" style="margin-right:100px;" href="{% url 'accounts:signup' %}">Sign Up</a>
   </div>
 
   {% endif %}
 
 </nav>
 {% if key %}
-
 <br><br>
 <div class="container">
   <div class="row">
@@ -211,8 +210,11 @@
   </div>
   {% for result in all_shows_with_query %}
       <div class="col-md-3">
-      <a href="{% url 'cast:CAST' result.id %}" class="link"><div><img src="/media/{{ result.photo }}" width="180px" height="250px"></div>
-        <div>{{ result.name }}</div>
+      <a href="{% url 'cast:CAST' result.id %}" class="link">
+        <div>
+          <img src="/media/{{ result.photo }}" width="180px" height="250px">
+        </div>
+        <div>{% for i in result.name %}{% if i in search_query %}<b>{% endif %}{{ i }}{% if i in search_query %}</b>{% endif %}{% endfor %}</div>
       </a><br>
     </div>
   {% endfor %}

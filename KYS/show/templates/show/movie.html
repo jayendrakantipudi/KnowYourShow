@@ -5,111 +5,129 @@
 <br><br>
 <div class="container-fluid background-container" style="margin-left:50px;">
   <div class="row">
-    <div class="col-md-8 heading">
-      <h1>{{show.titleName}}&nbsp({{show.year}})</h1>
-    </div>
-
-  </div><br>
-  <div class="row">
-    <div class="col-md-5"><img src="/media/{{show.titlePoster}}" width="500px" height="300px"></div>
-    <div class="col-md-3">
-      <b style="color:deepskyblue;">Directed By</b> :
-      {% for director in Directors %}
-        <a href="{% url 'cast:Director' director.id %}">{{director.name}}</a>&nbsp
-      {% endfor %}<br>
-      <b style="color:deepskyblue;">Produced By</b> :
-      {% for producer in Producers %}
-        <a href="{% url 'cast:Producer' producer.id %}">{{producer.name}}</a>&nbsp
-      {% endfor %}  <br>
-      <b style="color:deepskyblue;">Release Date</b> :   {{show.releaseDate}}<br>
-      <b style="color:deepskyblue;">Budget</b> : Rs. {{show.budget}} Cr<br>
-      <b style="color:deepskyblue;">Collection</b> :Rs. {{show.BoxOfficeCollection}} Cr<br>
-      <b style="color:deepskyblue;">Languages</b> <br>
-      <ul>
-        {% for lang in Languages %}
-        <li>{{lang.languages}}</li>
-        {% endfor %}
-      </ul>
-
-      <b style="color:deepskyblue;">Genres</b> <br>
-      <ul>
-        {% for genre in Genres %}
-        <li>{{genre.genres}}</li>
-        {% endfor %}
-      </ul>
-        <br>
-    </div>
-  </div><br>
-  <div class="row">
-    <div class="col-md-8" id="b">
-        <b style="color:deepskyblue;">Movie Plot</b> : {{show.storyLine}}
-    </div><a href='javascript:;' id="c" onclick="reveal()">see more</a>
-  </div> <a href="javascript:;" id="d" onclick="showless()" style="display:none">See less</a><br><br><br>
-  <div class="row">
-    <div class="col-md-8 heading">
-      <h3>Cast & Crew</h3>
-    </div>
-  </div><br>
-  <div class="row">
-    {% for cast in cast %}
-    <div class="col-md-2 cast" style="text-align:center;">
-      <a href="{% url 'cast:CAST' cast.id %}" class="link"><img src="/media/{{ cast.photo }}" width="180px" height="250px"></a><br>
-      <a href="{% url 'cast:CAST' cast.id %}" class="link">{{cast.name}}</a>
-    </div>
-    {% endfor %}
-  </div><br><br>
-  <div class="row">
-    <div class="col-md-4 heading">
-      <h3>Reviews & Ratings</h3>
+    <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-8 heading">
+        <h1>{{show.titleName}}&nbsp({{show.year}})</h1>
       </div>
-    <div class="col-md-4 heading rate_btn">
-        {% if user.is_authenticated %}
-                {% if user_rated %}
-        <button class="button" data-toggle="modal" data-target="#myModal">Already Rated</button>
-      {% else %}
-        <button class="button" data-toggle="modal" data-target="#myModal">Rate</button>
-      {% endif %}
-          {% else %}
-          <a class="button button_log" href="{% url 'login' %}">Login to Rate</a>
-        {% endif %}
 
-    </div>
-  </div><br>
-  <div class="row">
-    <div class="col-md-8">
-      <b  style="color:deepskyblue;">KYS Rating</b> : {% if RATING_INFO %}<b>{{KYSrating}}</b>/5({{total_reviews}}){% else %}<b>Not Rated Yet</b>  {% endif %}
-    </div>
-  </div><br>
-  {% if currentUser_review %}
-  <div class="row">
-    <div class="col-md-8">
-      <img src="{% static 'login-user-icon.png' %}" alt="no-image" width="50px" height="40px">
-      <b style="color:deepskyblue;font-size:20px;">{{currentUser_review.username}}</b>&nbsp &nbsp
-      <span style="font-size:15px"><i>{{currentUser_review.date_reviewed}}</i></span>&nbsp&nbsp
-      {% if currentUser_review.edited %}<span style="color:gray"><i>(edited)</i></span>{% endif %}<br>
-      <b style="color:deepskyblue;">Rating</b>&nbsp : {{currentUser_review.rating}}/5 <br>
-    </div>
-    <div class="col-md-8">
-      <b style="color:deepskyblue;">Review</b> : {{currentUser_review.Review}}<br><br><br><br>
-    </div>
-  </div>
-  {% endif %}
-  {% for review in reviews %}
-    {% if review.id is not currentUser_review.id %}
+    </div><br>
+    <div class="row">
+      <div class="col-md-7"><img src="/media/{{show.titlePoster}}" width="500px" height="300px"></div>
+      <div class="col-md-3">
+        <b style="color:deepskyblue;">Directed By</b> :
+        {% for director in Directors %}
+          <a href="{% url 'cast:Director' director.id %}">{{director.name}}</a>&nbsp
+        {% endfor %}<br>
+        <b style="color:deepskyblue;">Produced By</b> :
+        {% for producer in Producers %}
+          <a href="{% url 'cast:Producer' producer.id %}">{{producer.name}}</a>&nbsp
+        {% endfor %}  <br>
+        <b style="color:deepskyblue;">Release Date</b> :   {{show.releaseDate}}<br>
+        <b style="color:deepskyblue;">Budget</b> : Rs. {{show.budget}} Cr<br>
+        <b style="color:deepskyblue;">Collection</b> :Rs. {{show.BoxOfficeCollection}} Cr<br>
+        <b style="color:deepskyblue;">Languages</b> <br>
+        <ul>
+          {% for lang in Languages %}
+          <li>{{lang.languages}}</li>
+          {% endfor %}
+        </ul>
+
+        <b style="color:deepskyblue;">Genres</b> <br>
+        <ul>
+          {% for genre in Genres %}
+          <li>{{genre.genres}}</li>
+          {% endfor %}
+        </ul>
+          <br>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col-md-8" id="b">
+          <b style="color:deepskyblue;">Movie Plot</b> : {{show.storyLine}}
+      </div><a href='javascript:;' id="c" onclick="reveal()">see more</a>
+    </div> <a href="javascript:;" id="d" onclick="showless()" style="display:none">See less</a><br><br><br>
+    <div class="row">
+      <div class="col-md-8 heading">
+        <h3>Cast & Crew</h3>
+      </div>
+    </div><br>
+    <div class="row">
+      {% for cast in cast %}
+      <div class="col-md-3 cast" >
+        <a href="{% url 'cast:CAST' cast.id %}" class="link"><img src="/media/{{ cast.photo }}" width="180px" height="250px"></a><br>
+        <a href="{% url 'cast:CAST' cast.id %}" class="link" style="text-align:center;">{{cast.name}}</a><br><br><br>
+      </div>
+      {% endfor %}
+    </div><br><br>
+    <div class="row">
+      <div class="col-md-4 heading">
+        <h3>Reviews & Ratings</h3>
+        </div>
+      <div class="col-md-4 heading rate_btn">
+          {% if user.is_authenticated %}
+                  {% if user_rated %}
+          <button class="button" data-toggle="modal" data-target="#myModal">Already Rated</button>
+        {% else %}
+          <button class="button" data-toggle="modal" data-target="#myModal">Rate</button>
+        {% endif %}
+            {% else %}
+            <a class="button button_log" href="{% url 'login' %}">Login to Rate</a>
+          {% endif %}
+
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col-md-8">
+        <b  style="color:deepskyblue;">KYS Rating</b> : {% if RATING_INFO %}<b>{{KYSrating}}</b>/5({{total_reviews}}){% else %}<b>Not Rated Yet</b>  {% endif %}
+      </div>
+    </div><br>
+    {% if currentUser_review %}
     <div class="row">
       <div class="col-md-8">
         <img src="{% static 'login-user-icon.png' %}" alt="no-image" width="50px" height="40px">
-        <b style="color:deepskyblue;font-size:20px;">{{review.username}}</b>&nbsp &nbsp
-        <span style="font-size:15px"><i>{{review.date_reviewed}}</i></span>&nbsp&nbsp
-        {% if review.edited %}<span style="color:gray"><i>(edited)</i></span>{% endif %}<br>
-        <b style="color:deepskyblue;">Rating</b>&nbsp : {{review.rating}}/5 <br>
+        <b style="color:deepskyblue;font-size:20px;">{{currentUser_review.username}}</b>&nbsp &nbsp
+        <span style="font-size:15px"><i>{{currentUser_review.date_reviewed}}</i></span>&nbsp&nbsp
+        {% if currentUser_review.edited %}<span style="color:gray"><i>(edited)</i></span>{% endif %}<br>
+        <b style="color:deepskyblue;">Rating</b>&nbsp : {{currentUser_review.rating}}/5 <br>
       </div>
       <div class="col-md-8">
-        <b style="color:deepskyblue;">Review</b> : {{review.Review}}<br><br><br><br>
+        <b style="color:deepskyblue;">Review</b> : {{currentUser_review.Review}}<br><br><br><br>
       </div>
     </div>
     {% endif %}
-  {% endfor %}
+    {% for review in reviews %}
+      {% if review.id is not currentUser_review.id %}
+      <div class="row">
+        <div class="col-md-8">
+          <img src="{% static 'login-user-icon.png' %}" alt="no-image" width="50px" height="40px">
+          <b style="color:deepskyblue;font-size:20px;">{{review.username}}</b>&nbsp &nbsp
+          <span style="font-size:15px"><i>{{review.date_reviewed}}</i></span>&nbsp&nbsp
+          {% if review.edited %}<span style="color:gray"><i>(edited)</i></span>{% endif %}<br>
+          <b style="color:deepskyblue;">Rating</b>&nbsp : {{review.rating}}/5 <br>
+        </div>
+        <div class="col-md-8">
+          <b style="color:deepskyblue;">Review</b> : {{review.Review}}<br><br><br><br>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+    <div class="col-md-3">
+      <div class="row heading1">
+        <h4>Suggested Movies</h4>
+      </div>
+      {% for movie in suggested_movies %}
+      {% if show.id is not movie.id %}
+      <div class="row">
+        <div class="col-md-9">
+          <a href="{% url 'show:movie' movie.id %}"><span style="font-size:25px;">{{ movie.titleName }}</span></a>
+        </div>
+      </div><br>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 </div>
 <br><br>
 
