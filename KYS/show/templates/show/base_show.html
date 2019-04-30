@@ -117,6 +117,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-black" style="padding:0px;background-color: black;position: relative;">
 <a class="navbar-brand" href="{% url 'mainpage' %}" style="padding:0px;width:15%"><img src="{% static 'logo.png' %}"  alt="No logo" id="image"></a>
@@ -168,7 +169,7 @@
 {% if user.is_authenticated %}
 <div class="nav-item dropdown" style="margin-right:120px;">
   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"></span><i class="fa fa-user-circle-o" style="font-size:40px"></i></b>
+    <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"><i class="fa fa-user-circle-o" style="font-size:40px"></i></span></b>
   </a>
 
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style media="screen">
 
     </style>
@@ -28,20 +29,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><b style="color:deepskyblue">Home</b> <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'mainpage' %}"><b style="color:deepskyblue">Home</b> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#"><b style="color:deepskyblue">About Us</b></a>
+        <a class="nav-link" href=""><b style="color:deepskyblue">About Us</b></a>
       </li>
       <li class="nav-item dropdown " >
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"></span>Filter</b>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">All</a>
+          <a class="dropdown-item" href="#">By Language</a>
+          <a class="dropdown-item" href="#">By Genre</a>
         </div>
       </li>
 
@@ -69,7 +69,7 @@
 {% if user.is_authenticated %}
   <div class="nav-item dropdown" style="margin-right:120px;">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"></span></b>
+      <b style="color:deepskyblue"><span class="glyphicon glyphicon-filter"><i class="fa fa-user-circle-o" style="font-size:40px"></i></span></b>
     </a>
 
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -122,10 +122,11 @@
   </a>
 </div><br><br>
 
-<div class="container-fluid" ">
-
+<div class="container-fluid">
 <br><br>
+
   {% for list_name,list in list_of_movies %}
+  {% if list %}
     <div class="row">
         <div class="col-md-12 heading">
           <h2 style="margin-left: 25px;">{{ list_name }}</h2>
@@ -138,102 +139,13 @@
           <a href="{% url 'show:movie' movie.id %}" class="link">
               <img src="/media/{{ movie.titlePoster }}" width="180px" height="250px">
           </a>
-{#         <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
         </div>
         {% endfor %}
 
     </div><br><br><br><br><br>
+    {% endif %}
 {% endfor %}
-{#    <div class="row">#}
-{#        <div class="col-md-12 heading">#}
-{#          <h2 style="margin-left: 25px;">Telugu Movies</h2>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="row">#}
-{#        {% for movie in movies_telugu %}#}
-{#        <div class="col-md-2" style="text-align: center;">#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
-{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
-{#          </a><br>#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div><br><br><br>#}
-{#    <div class="row">#}
-{#        <div class="col-md-12 heading">#}
-{#          <h2 style="margin-left: 25px;">English Movies</h2>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="row">#}
-{#        {% for movie in movies_english %}#}
-{#        <div class="col-md-2" style="text-align: center;">#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
-{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
-{#          </a><br>#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div><br><br><br>#}
-{#    <div class="row">#}
-{#        <div class="col-md-12 heading">#}
-{#          <h2 style="margin-left: 25px;">Tamil Movies</h2>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="row">#}
-{#        {% for movie in movies_tamil %}#}
-{#        <div class="col-md-2" style="text-align: center;">#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
-{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
-{#          </a><br>#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div><br><br><br>#}
-{#    <div class="row">#}
-{#        <div class="col-md-12 heading">#}
-{#          <h2 style="margin-left: 25px;">Malyalam Movies</h2>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="row">#}
-{#        {% for movie in movies_malyalam %}#}
-{#        <div class="col-md-2" style="text-align: center;">#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
-{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
-{#          </a><br>#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div><br><br><br>#}
-{#    <div class="row">#}
-{#        <div class="col-md-12 heading">#}
-{#          <h2 style="margin-left: 25px;">Hindi Movies</h2>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="row">#}
-{#        {% for movie in movies_hindi %}#}
-{#        <div class="col-md-2" style="text-align: center;">#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
-{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
-{#          </a><br>#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div><br><br><br>#}
-{#    <div class="row">#}
-{#        <div class="col-md-12 heading">#}
-{#          <h2 style="margin-left: 25px;">Horror Movies</h2>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="row">#}
-{#        {% for movie in movies_horror %}#}
-{#        <div class="col-md-2" style="text-align: center;">#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">#}
-{#            <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">#}
-{#          </a><br>#}
-{#          <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>#}
-{#        </div>#}
-{#        {% endfor %}#}
-{#    </div>#}
+
 </div>
 {% endblock content %}
 

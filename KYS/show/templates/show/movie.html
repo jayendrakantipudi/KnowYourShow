@@ -115,15 +115,15 @@
     </div>
     <div class="col-md-3">
       <div class="row heading1">
-        <h4>Suggested Movies</h4>
+        <h4>Recommended Movies</h4>
       </div>
       {% for movie in suggested_movies %}
       {% if show.id is not movie.id %}
       <div class="row">
         <div class="col-md-9">
-          <a href="{% url 'show:movie' movie.id %}"><span style="font-size:25px;">{{ movie.titleName }}</span></a>
+          <a href="{% url 'show:movie' movie.id %}"><span style="font-size:18px;">{{ movie.titleName }}({{ movie.year }})</span></a>
         </div>
-      </div><br>
+      </div>
       {% endif %}
       {% endfor %}
     </div>

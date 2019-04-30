@@ -95,7 +95,7 @@ def get_suggested_movies(id):
         ORDER BY suggested_count DESC;
     ''',[id])
     suggested_movies = Show.objects.raw('''
-        SELECT * FROM show_show
+        SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
         WHERE suggested_count!=0;
     ''')
     return suggested_movies
