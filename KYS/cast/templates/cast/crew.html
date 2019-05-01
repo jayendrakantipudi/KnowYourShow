@@ -6,21 +6,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 heading">
-      <h1>{{crew.name}}</h1>
+      <h1>{{BirthName}}</h1>
     </div>
 <hr>
   </div><br>
   <div class="row">
-    <div class="col-md-4"><img src="/media/{{ crew.photo }}" width="300px" height="400px"></div>
+    <div class="col-md-4"><img src="{{Photo}}" width="300px" height="400px"></div>
     <div class="col-md-6">
-        <b style="color:deepskyblue;">Profession </b> <br>
-        <ul>
-          {% for profession in castProfession %}
-          <li>{{profession.name}}</li>
-          {% endfor %}
-        </ul>
-        <b style="color:deepskyblue;">Age </b> : {{crew.age }}<br><br>
-        <b style="color:deepskyblue;">Started Movies From </b> : {{yearStarted }}
+
+        <b style="color:deepskyblue;">Age </b> : {{dob}}<br><br>
+        <b style="color:deepskyblue;">Years Active </b> : {{Yearsactive }}
     </div>
   </div><br><br>
   <div class="row">
@@ -34,7 +29,7 @@
       <a href="{% url 'show:movie' movie.id %}" class="link">
         <img src="/media/{{ movie.titlePoster1 }}" width="180px" height="250px">
       </a><br>
-      <a href="{% url 'show:movie' movie.id %}" class="link">{{movie.titleName}}</a><br>({{movie.year}})<br>
+      <a href="{% url 'show:movie' movie.id %}" class="link" style="color:black;">{{movie.titleName}}</a><br>({{movie.year}})<br>
     </div>
     {% endfor %}
   </div><br><br>
@@ -45,8 +40,9 @@
   </div><br>
   <div class="row">
     <div class="col-md-9">
-      <b style="color:deepskyblue;">Born </b> :   {{crew.dob}} <b style="color:deepskyblue;">in</b> {{crew.birthPlace}} <br><br>
-      <b style="color:deepskyblue;">Biography</b> : {{crew.biography}}<br>
+      <b style="color:deepskyblue;">Born </b> :   {{dob}} <b style="color:deepskyblue;">in</b> {{placeofbirth}} <br><br>
+      <b style="color:deepskyblue;">Biography</b> : {{Biography}}<br>
+      <b style="color:deepskyblue;">Education</b> : {{Education}}<br>
     </div>
   </div>
 </div>

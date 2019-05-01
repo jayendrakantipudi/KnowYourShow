@@ -1,5 +1,5 @@
 from django.db import models
-from cast.models import cast, director, producer
+from cast.models import cast, director, producer, directors
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils.timezone import now
@@ -27,14 +27,20 @@ class review(models.Model):
 class Show(models.Model):
 	titleName = models.CharField(max_length=120)
 	releaseDate = models.DateField()
-	director = models.ManyToManyField(director)
-	producer = models.ManyToManyField(producer)
+	director = models.ManyToManyField(directors)
 	language = models.ManyToManyField(language)
+
+	# director = models.ForeignKey(directors,on_delete=models.SET_NULL,null=True,blank=True)
+	# producer = models.ForeignKey(producer,on_delete=models.SET_NULL,null=True,blank=True)
+	# language = models.ForeignKey(language,on_delete=models.SET_NULL,null=True,blank=True)
 	storyLine = models.CharField(max_length=2500)
 	budget = models.FloatField(null=True)
+	suggested_count = models.IntegerField(default=0)
 	BoxOfficeCollection = models.FloatField(null=True)
 	GENRE = models.ManyToManyField(GENRE)
-	titlePoster = models.ImageField(upload_to='movie_posters',blank=True)
+	# GENRE = models.ForeignKey(GENRE,on_delete=models.SET_NULL,null=True,blank=True)
+	imageLink = models.CharField(max_length=2500)
 	cast = models.ManyToManyField(cast)
+	movieViewCount = models.IntegerField(default= 0)
 	def __str__(self):
 		return self.titleName
