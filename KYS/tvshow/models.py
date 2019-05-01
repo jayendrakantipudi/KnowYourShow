@@ -12,6 +12,7 @@ class TVShow(models.Model):
     language = models.ManyToManyField(language)
     seriesSummary = models.CharField(max_length=2500)
     seriesPoster = models.ImageField(upload_to='series_posters', blank=True)
+    seriesViewCount = models.IntegerField(default= 0)
 
     def __str__(self):
         return self.titleName

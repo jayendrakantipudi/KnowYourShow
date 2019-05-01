@@ -237,6 +237,18 @@ def movie(request,id):
             'KYSrating': total_rating,
             'suggested_movies':suggested_movies,
         }
+    # with connection.cursor() as cursor:
+    #     cursor.execute('''
+    #         CALL update_movie_count(@%s);
+    #     ''',[id])
+    # with connection.cursor() as cursor:
+    #     cursor.execute('''
+    #         UPDATE show_show
+    #         SET movieViewCount = movieViewCount + 1
+    #         WHERE movie_id = %s;
+    #     ''',[id])
+    # a = Show.objects.get(pk=id)
+    # print(a.count)
     return render(request,'show/movie.html',context)
 
 
