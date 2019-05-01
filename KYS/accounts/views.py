@@ -52,12 +52,14 @@ def signup(request):
 def signup2(request):
     if request.method == 'POST':
         age = request.POST['age']
+        phone = request.POST['phone']
+        # profilePic = request.POST['profilePic']
         # profilePic = request.POST['profilePic']
         with connection.cursor() as cursor:
             cursor.execute('''
-                INSERT INTO accounts_profile(age,user_id)
-                VALUES(%s,%s);
-            ''',[age,request.user.id])
+                INSERT INTO accounts_profile(age,phone,user_id)
+                VALUES(%s,%s,%s);
+            ''',[age,phone,request.user.id])
         return redirect('/')
     else:
         return render(request, 'accounts/signup2.html', {})
