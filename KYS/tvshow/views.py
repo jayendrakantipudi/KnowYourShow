@@ -28,7 +28,23 @@ def tvshowpage(request, id):
             WHERE id in (SELECT season_id FROM tvshow_episode WHERE series_id=%s);
             ;
         ''', [id])
-    context = {'tvshow': tvshow[0], 'genres': genres, 'langs': language, 'seasons': seasons }
+    cast = TVShow.objects.raw('''
+            SELECT * FROM cast_cast WHERE id in (SELECT cast_id FROM tvshow_episode_cast WHERE episode_id
+            in (SELECT episode_id FROM tvshow_episode WHERE series_id=%s));
+            ;
+    ''', [id])
+    context = {'tvshow': tvshow[0], 'genres': genres, 'langs': language, 'seasons': seasons, 'cast': cast }
+
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            CALL update_series_count(@%s);
+        ''',[id])
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            UPDATE tvshow_tvshow
+            SET seriesViewCount = seriesViewCount + 1
+            WHERE series_id = %s;
+        ''',[id])
     return render(request, 'tvshow/tvshow_page.html', context)
 
 

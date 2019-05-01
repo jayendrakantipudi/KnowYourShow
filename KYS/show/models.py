@@ -37,5 +37,6 @@ class Show(models.Model):
 	GENRE = models.ManyToManyField(GENRE)
 	titlePoster = models.ImageField(upload_to='movie_posters',blank=True)
 	cast = models.ManyToManyField(cast)
+	movieViewCount = models.IntegerField(default= 0)
 	def __str__(self):
 		return self.titleName
