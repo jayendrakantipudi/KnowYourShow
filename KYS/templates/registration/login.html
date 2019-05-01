@@ -31,17 +31,21 @@
     transform: rotate(340deg);
 
 }
+input{
+  width: 100%;
+}
     </style>
   </head>
 <body >
 <div >
     <img  src="{% static 'asset6.png' %}" style="position: absolute;top: 0;left: 76%;;width:200px ">
-    <p style="margin-left: 80%;font-family: 'Merriweather', serif;font-size: 35px;position: absolute">Sign Up</p>
+    <p style="margin-left: 80%;font-family: 'Merriweather', serif;font-size: 35px;position: absolute"></p>
     <img  src="{% static 'asset.png' %}" style="position: absolute;top: 0;left: 0;width:100%">
     <img  src="{% static 'Asset 5.png' %}" style="position: absolute;top: 30%;right: 0;">
     <img  src="{% static 'Asset 6.png' %}" style="position: absolute;top: 60%;left: 0;">
     <img class="rotate" src="{% static 'wheel.png' %}" style="position: absolute; left: 0px; top: 0px;margin-left:40% ">
 <br><br><h1 style="margin-left: 30%;font-family: 'Lobster', cursive;font-size: 100px;color:white;position: absolute;margin-top: 32%">Know Your Show.</h1>
+{% block content %}
     <div class="second" style="position: absolute;
 		top: 60px;
 		left: 80px;margin-top:10%;margin-left: 30%;background-color: #f7f7f7;padding-left:3%;padding-right:3%;padding-top:2%">
@@ -60,9 +64,11 @@
         </div>
         <div class="clearfix">
             <!-- <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label> -->
-            <a href="#" class="pull-right">Forgot Password?</a>
+            <a href="{%url 'password_reset'%}" class="pull-right">Forgot Password?</a>
         </div>
     </form>
-    <p class="text-center"><a href="#" class="create_acc_login">Create an Account</a></p>
-    </div></div>
+    <p class="text-center"><a href="{%url 'accounts:signup'%}" class="create_acc_login">Create an Account</a></p>
+    </div>
+{% endblock content %}
+  </div>
 </body>

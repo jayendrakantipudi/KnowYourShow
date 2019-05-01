@@ -26,6 +26,11 @@ class cast(models.Model):
 	def __str__(self):
 		return self.name
 
+class directors(models.Model):
+	name = models.CharField(max_length=120)
+	def __str__(self):
+		return self.name
+
 class director(models.Model):
 	GENDER = (
 			('Male','Male'),

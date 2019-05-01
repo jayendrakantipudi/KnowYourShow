@@ -4,7 +4,11 @@ from KYS.forms import search_bar
 from show.models import Show
 from show.models import language
 from .models import cast
-
+from bs4 import BeautifulSoup
+import requests
+import wptools
+import wikipedia
+import re
 # Create your views here.
 
 def Cast(request,id):
@@ -145,16 +149,16 @@ def Director(request,id):
                 for i in all_shows_with_query:
                     print(i)
     director = cast.objects.raw('''
-        SELECT * FROM cast_director
+        SELECT * FROM cast_directors
         WHERE id=%s;
     ''',[id])
-    castProfession = cast.objects.raw('''
-        SELECT * FROM cast_profession
-        where id in (select profession_id from cast_director_profession where director_id=%s);
-    ''',[id])
+    # castProfession = cast.objects.raw('''
+    #     SELECT * FROM cast_profession
+    #     where id in (select profession_id from cast_director_profession where director_id=%s);
+    # ''',[id])
     directedMovies = Show.objects.raw('''
         SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
-        WHERE id in (SELECT show_id FROM show_show_director WHERE director_id=%s)
+        WHERE id in (SELECT show_id FROM show_show_director WHERE directors_id=%s)
         ORDER BY releaseDate DESC;
     ''',[id])
     form = search_bar()
@@ -163,7 +167,7 @@ def Director(request,id):
     context = {
         'crew' : director[0],
         'crewMovies': directedMovies,
-        'castProfession':castProfession,
+        # 'castProfession':castProfession,
         'key' : True,
         'yearStarted' : yearStarted,
     }
@@ -235,3 +239,73 @@ def Producer(request,id):
         'key' : True,
     }
     return render(request,'cast/crew.html',context)
+
+
+
+def cast_details(request,id):
+    Name = cast.objects.raw('''
+        SELECT * FROM cast_directors
+        WHERE id = %s;
+    ''',[id])
+    name = Name[0].name
+    cast_data = wptools.page(name).get_parse()
+    infobox = cast_data.data['infobox']
+    try:
+        BirthName= infobox['birth_name']
+    except:
+        BirthName=None
+    try:
+        a = re.split('[{{ | }}]' , infobox['birth_date'])
+        dob = []
+        for i in a:
+            try:
+                dob.append(int(i))
+            except:
+                pass
+    except:
+        dob = None
+    try:
+        s = infobox['birth_place']
+        placeofbirth = ''.join(i for i in s if i not in [ '[' , ']' ])
+    except:
+        placeofbirth=None
+    try:
+        s1= infobox['education']
+        Education = ''.join(i for i in s1 if i not in [ '[' , ']', '(', ')' ])
+    except:
+        try:
+            s1= infobox['alma_mater']
+            Education = ''.join(i for i in s1 if i not in [ '[' , ']', '(', ')' ])
+        except:
+            Education= None
+    try:
+        s1= infobox['occupation']
+        s2 = ''.join(i for i in s1 if i not in [ '[' , ']', '(', ')', '{', '}' ])
+        s2 = re.split('[\n* , |]', s2)
+        occupation = [x for x in s2 if x != '']
+        if occupation[0] == 'flatlist':
+            occupation.remove('flatlist')
+        if occupation[0] == 'hlist':
+            occupation.remove('hlist')
+    except:
+        occupation=None
+    try:
+        Photo = cast_data.data['image'][0]['url']
+    except:
+        Photo = None
+    try:
+        Yearsactive = infobox['years_active']
+    except:
+        Yearsactive = None
+    Biography= wikipedia.page(name).summary
+
+    details = {
+        'BirthName':BirthName,
+        'dob':dob,
+        'placeofbirth':placeofbirth,
+        'Education':Education,
+        'Photo':Photo,
+        'Yearsactive':Yearsactive,
+        'Biography':Biography,
+    }
+    return render(request,'cast/crew.html',details)

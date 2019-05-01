@@ -11,7 +11,10 @@ class TVShow(models.Model):
     GENRE = models.ManyToManyField(GENRE)
     language = models.ManyToManyField(language)
     seriesSummary = models.CharField(max_length=2500)
-    seriesPoster = models.ImageField(upload_to='series_posters', blank=True)
+
+    seriesPoster = models.CharField(max_length=1000)
+    # seriesPoster = models.ImageField(upload_to='series_posters', blank=True)
+    seriesViewCount = models.IntegerField(default= 0)
 
     def __str__(self):
         return self.titleName
@@ -30,11 +33,12 @@ class Episode(models.Model):
     series = models.ForeignKey(TVShow, on_delete=models.CASCADE)
     season = models.ForeignKey(Season, on_delete=models.DO_NOTHING)
     episodeName = models.CharField(max_length=50, null= True)
-    releaseDate = models.DateField()
+    releaseDate = models.CharField(max_length=100)
     cast = models.ManyToManyField(cast)
     episodeReview = models.ForeignKey(review, on_delete=models.SET_NULL, blank=True, null=True)
     runTime = models.DurationField()
-    episodePoster = models.ImageField(upload_to='series_posters/episode_posters', blank=True)
+    episodePoster = models.CharField(max_length=1000)
+    # episodePoster = models.ImageField(upload_to='series_posters/episode_posters', blank=True)
     episodeSummary = models.CharField(max_length=2500)
 
     def __str__(self):
