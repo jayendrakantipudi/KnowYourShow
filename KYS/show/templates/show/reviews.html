@@ -1,0 +1,15 @@
+{% extends 'KYS/homePage.html' %}
+{% block content %}
+<br><br><br><br><br>
+  <div class="container">
+    <div class="row heading" style="text-align:left">
+      <h1>Your Reviews</h1>
+      {% for rev in user_reviews %}
+      <div class="col-md-12">
+          <span>{{rev.rating}} ({{rev.date_reviewed}})</span>
+          <span>{{rev.Review}}</span>
+      </div>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

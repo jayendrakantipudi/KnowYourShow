@@ -449,3 +449,13 @@ def update_show(request,movieID):
                 ''',[tn,rd,sl,bd,boc,movieID])
     suform = show_update_form()
     return render(request,'show/update_show.html',{'show_update_form':suform})
+
+def user_review(request):
+    user_reviews = Show.objects.raw('''
+        SELECT * FROM show_review
+        WHERE reviewer_id=%s;
+    ''',[request.user.id])
+    context = {
+        'user_reviews':user_reviews,
+    }
+    return render(request,'show/reviews.html',context)

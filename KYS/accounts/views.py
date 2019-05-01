@@ -1,5 +1,5 @@
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import RegisterForm
 from django.db import connection
 from django.http import HttpResponse
@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from .models import Profile
 
 
 
@@ -44,7 +45,7 @@ def signup(request):
             # login(request, new_user)
 
             # return redirect('accounts:signup2')
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return redirect('/')
     else:
         form = RegisterForm()
     return render(request, 'accounts/signup.html', {'form': form})
@@ -79,3 +80,13 @@ def activate(request, uidb64, token):
         # return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+def profile(request):
+    profile_temp = get_object_or_404(User,id=request.user.id)
+    profile = profile_temp
+    print(profile_temp)
+    context = {
+    'profile':profile,
+    }
+    return render(request,'accounts/profile.html',context)
