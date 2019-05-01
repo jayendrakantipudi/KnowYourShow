@@ -73,8 +73,8 @@
     </a>
 
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="#">Profile</a>
-      <a class="dropdown-item" href="#">Your Reviews</a>
+      <a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a>
+      <a class="dropdown-item" href="{% url 'show:user_review' %}">Your Reviews</a>
       <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
     </div>
   </div>

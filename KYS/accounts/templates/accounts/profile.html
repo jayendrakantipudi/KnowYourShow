@@ -1,0 +1,14 @@
+{% extends 'KYS/homePage.html' %}
+{% block content %}
+<br><br><br><br><br>
+  <div class="container">
+    <div class="row heading" style="text-align:left">
+      <div class="col-md-12">
+      <h1 >{{profile.username}}</h1><br>
+      <h3 >Name : {{profile.first_name}}  {{profile.last_name}}</h3>
+      <h3 >Email : {{profile.email}}</h3>
+      </div><br>
+      <button type="button" name="button">Edit Profile</button>
+    </div>
+  </div>
+{% endblock content %}

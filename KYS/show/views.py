@@ -265,6 +265,18 @@ def movie(request,id):
             'KYS_suggested_movies':KYS_suggest,
             'suggested_movies':suggested_movies,
         }
+    # with connection.cursor() as cursor:
+    #     cursor.execute('''
+    #         CALL update_movie_count(@%s);
+    #     ''',[id])
+    # with connection.cursor() as cursor:
+    #     cursor.execute('''
+    #         UPDATE show_show
+    #         SET movieViewCount = movieViewCount + 1
+    #         WHERE movie_id = %s;
+    #     ''',[id])
+    # a = Show.objects.get(pk=id)
+    # print(a.count)
     return render(request,'show/movie.html',context)
 
 
@@ -478,3 +490,13 @@ def update_show(request,movieID):
                 ''',[tn,rd,sl,bd,boc,movieID])
     suform = show_update_form()
     return render(request,'show/update_show.html',{'show_update_form':suform})
+
+def user_review(request):
+    user_reviews = Show.objects.raw('''
+        SELECT * FROM show_review
+        WHERE reviewer_id=%s;
+    ''',[request.user.id])
+    context = {
+        'user_reviews':user_reviews,
+    }
+    return render(request,'show/reviews.html',context)

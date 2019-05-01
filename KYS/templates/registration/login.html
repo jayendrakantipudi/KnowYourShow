@@ -39,7 +39,7 @@ input{
 <body >
 <div >
     <img  src="{% static 'asset6.png' %}" style="position: absolute;top: 0;left: 76%;;width:200px ">
-    <p style="margin-left: 80%;font-family: 'Merriweather', serif;font-size: 35px;position: absolute">Sign Up</p>
+    <p style="margin-left: 80%;font-family: 'Merriweather', serif;font-size: 35px;position: absolute"></p>
     <img  src="{% static 'asset.png' %}" style="position: absolute;top: 0;left: 0;width:100%">
     <img  src="{% static 'Asset 5.png' %}" style="position: absolute;top: 30%;right: 0;">
     <img  src="{% static 'Asset 6.png' %}" style="position: absolute;top: 60%;left: 0;">
@@ -64,10 +64,10 @@ input{
         </div>
         <div class="clearfix">
             <!-- <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label> -->
-            <a href="#" class="pull-right">Forgot Password?</a>
+            <a href="{%url 'password_reset'%}" class="pull-right">Forgot Password?</a>
         </div>
     </form>
-    <p class="text-center"><a href="#" class="create_acc_login">Create an Account</a></p>
+    <p class="text-center"><a href="{%url 'accounts:signup'%}" class="create_acc_login">Create an Account</a></p>
     </div>
 {% endblock content %}
   </div>

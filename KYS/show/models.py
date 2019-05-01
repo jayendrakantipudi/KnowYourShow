@@ -41,6 +41,6 @@ class Show(models.Model):
 	# GENRE = models.ForeignKey(GENRE,on_delete=models.SET_NULL,null=True,blank=True)
 	imageLink = models.CharField(max_length=2500)
 	cast = models.ManyToManyField(cast)
-	# cast = models.ForeignKey(cast,on_delete=models.SET_NULL,null=True,blank=True)
+	movieViewCount = models.IntegerField(default= 0)
 	def __str__(self):
 		return self.titleName
