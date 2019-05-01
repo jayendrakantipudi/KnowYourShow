@@ -503,7 +503,7 @@ def search(request):
                 }
                 return render(request, 'KYS/search_result.html', context)
             elif search_ty == "Tv shows":
-                all_shows_with_query_TV = TVShow.objects.raw('''
+                all_shows_with_query_TV = T.objects.raw('''
                         SELECT *,lOCATE(%s,titleName)
                         FROM tvshow_tvshow
                         WHERE locate(%s,titleName)>0;

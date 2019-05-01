@@ -199,7 +199,7 @@
   {% for result in all_searches %}
     <div class="col-md-3">
         <a href="{% url 'show:movie' result.id %}" class="link">
-        <div><img src="/media/{{ result.titlePoster1 }}" width="180px" height="250px"></div>
+        <div><img src="{{result.imageLink}}" width="180px" height="250px"></div>
         <div>{{ result.titleName }}<br>({{result.year}})</div>
         </a>
     </div>
@@ -225,11 +225,11 @@
   {% endif %}
   {% if all_shows_with_query_TV%}
   <div class="col-md-12">
-    <h2>Cast</h2>
+    <h2>TV Shows</h2>
   </div>
   {% for result in all_shows_with_query_TV %}
       <div class="col-md-3">
-      <a href="{% url 'tvshow:showpage' result.id %}" class="link"><div><img src="/media/{{ result.seriesPoster }}" width="180px" height="250px"></div>
+      <a href="{% url 'tvshow:showpage' result.id %}" class="link"><div><img src="{{ result.seriesPoster }}" width="180px" height="250px"></div>
         <div>{{ result.titleName }}</div>
       </a><br>
     </div>

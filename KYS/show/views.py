@@ -44,54 +44,54 @@ def get_suggested_movies(id):
     shows = Show.objects.raw('''
         SELECT * FROM show_show;
     ''')
-    for temp in shows:
-        with connection.cursor() as cursor:
-            cursor.execute('''
-                UPDATE show_show
-                SET suggested_count = 0
-                WHERE id=%s;
-            ''',[temp.id])
-    for movie_temp in suggested_movies_lang:
-        lang_movie_temp = Show.objects.raw('''
-            SELECT * FROM show_language
-            WHERE id in (SELECT language_id FROM show_show_language WHERE show_id=%s);
-        ''',[movie_temp.id])
-        # for i in lang_movie_temp:
-        #     print(i.languages)
-        #     print()
-        # lang_movie_temp = []
-        count = movie_temp.suggested_count
-        for lang_temp in langs:
-            for temp_lang in lang_movie_temp:
-                if(lang_temp.languages==temp_lang.languages):
-                    count = count + 1
-        with connection.cursor() as cursor:
-            cursor.execute('''
-                UPDATE show_show
-                SET suggested_count = %s
-                WHERE id=%s;
-            ''',[count,movie_temp.id])
+    # for temp in shows:
+    #     with connection.cursor() as cursor:
+    #         cursor.execute('''
+    #             UPDATE show_show
+    #             SET suggested_count = 0
+    #             WHERE id=%s;
+    #         ''',[temp.id])
+    # for movie_temp in suggested_movies_lang:
+    #     lang_movie_temp = Show.objects.raw('''
+    #         SELECT * FROM show_language
+    #         WHERE id in (SELECT language_id FROM show_show_language WHERE show_id=%s);
+    #     ''',[movie_temp.id])
+    #     # for i in lang_movie_temp:
+    #     #     print(i.languages)
+    #     #     print()
+    #     # lang_movie_temp = []
+    #     count = movie_temp.suggested_count
+    #     for lang_temp in langs:
+    #         for temp_lang in lang_movie_temp:
+    #             if(lang_temp.languages==temp_lang.languages):
+    #                 count = count + 1
+    #     with connection.cursor() as cursor:
+    #         cursor.execute('''
+    #             UPDATE show_show
+    #             SET suggested_count = %s
+    #             WHERE id=%s;
+    #         ''',[count,movie_temp.id])
 
 
 
-    for movie_temp in suggested_movies_genre:
-        genres_movie_temp = Show.objects.raw('''
-            SELECT * FROM show_GENRE
-            WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
-            ;
-        ''',[movie_temp.id])
-        count = movie_temp.suggested_count
-        for genre_temp in genres:
-            for temp_genre in genres_movie_temp:
-                if(genre_temp.genres==temp_genre.genres):
-                    count = count + 1
-        # print(movie_temp.suggested_count)
-        with connection.cursor() as cursor:
-            cursor.execute('''
-                UPDATE show_show
-                SET suggested_count = %s
-                WHERE id=%s;
-            ''',[count,movie_temp.id])
+    # for movie_temp in suggested_movies_genre:
+    #     genres_movie_temp = Show.objects.raw('''
+    #         SELECT * FROM show_GENRE
+    #         WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
+    #         ;
+    #     ''',[movie_temp.id])
+    #     count = movie_temp.suggested_count
+    #     for genre_temp in genres:
+    #         for temp_genre in genres_movie_temp:
+    #             if(genre_temp.genres==temp_genre.genres):
+    #                 count = count + 1
+    #     # print(movie_temp.suggested_count)
+    #     with connection.cursor() as cursor:
+    #         cursor.execute('''
+    #             UPDATE show_show
+    #             SET suggested_count = %s
+    #             WHERE id=%s;
+    #         ''',[count,movie_temp.id])
 
 
 
@@ -373,25 +373,25 @@ def review_rate(request,id):
         SELECT *,username FROM show_review,auth_user
         WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id AND show_review.reviewer_id=%s;
     ''',[id,request.user.id])
-
-    for movie_temp in suggested_movies:
-        genres_movie_temp = Show.objects.raw('''
-            SELECT * FROM show_GENRE
-            WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
-            ;
-        ''',[movie_temp.id])
-        count = 0
-        for genre_temp in genres:
-            for temp_genre in genres_movie_temp:
-                if(genre_temp.genres==temp_genre.genres):
-                    count = count + 1
-        with connection.cursor() as cursor:
-            cursor.execute('''
-                UPDATE show_show
-                SET suggested_count = %s
-                WHERE id=%s;
-            ''',[count,movie_temp.id])
-        print(movie_temp.titleName,count)
+    # 
+    # for movie_temp in suggested_movies:
+    #     genres_movie_temp = Show.objects.raw('''
+    #         SELECT * FROM show_GENRE
+    #         WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
+    #         ;
+    #     ''',[movie_temp.id])
+    #     count = 0
+    #     for genre_temp in genres:
+    #         for temp_genre in genres_movie_temp:
+    #             if(genre_temp.genres==temp_genre.genres):
+    #                 count = count + 1
+    #     with connection.cursor() as cursor:
+    #         cursor.execute('''
+    #             UPDATE show_show
+    #             SET suggested_count = %s
+    #             WHERE id=%s;
+    #         ''',[count,movie_temp.id])
+    #     print(movie_temp.titleName,count)
     KYS_suggested_movies = Show.objects.raw('''
         SELECT *,EXTRACT(YEAR FROM releaseDate) as year FROM show_show
         WHERE id in (SELECT show_id FROM show_review)
