@@ -5,7 +5,7 @@ from django.conf import settings
 
 app_name = 'tvshow'
 urlpatterns = [
-    path("tvshow/<int:id>", views.tvshowpage),
+    path("tvshow/<int:id>", views.tvshowpage,name='showpage'),
     path("tvshow/<int:series_id>/s<int:season_id>/", views.seasonpage,name='seasonpage'),
     path("tvshow/<int:series_id>/s<int:season_id>/e<int:episodeNum>/", views.episodepage, name='episodepage')
 ]

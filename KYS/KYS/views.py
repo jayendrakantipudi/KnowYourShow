@@ -443,7 +443,7 @@ def search(request):
             search_query = form.cleaned_data['search_query']
             search_ty = form.cleaned_data['search_ty']
             all_searches = []
-            if search_ty == 'movies':
+            if search_ty == 'Movies':
                 all_shows_with_query = Show.objects.raw('''
                                SELECT *, EXTRACT(YEAR FROM releaseDate) AS year,LOCATE(%s,titleName)
                                FROM show_show
@@ -479,7 +479,7 @@ def search(request):
                 }
                 return render(request, 'KYS/search_result.html', context)
 
-            else:
+            elif search_ty == 'Cast':
                 all_shows_with_query = cast.objects.raw('''
                                SELECT *, LOCATE(%s,name)
                                FROM cast_cast
@@ -497,6 +497,28 @@ def search(request):
                 form=search_bar()
                 context = {
                     'all_shows_with_query': all_shows_with_query,
+                    'key':key,
+                    'search_query' : search_query,
+                    'search_form':form,
+                }
+                return render(request, 'KYS/search_result.html', context)
+            elif search_ty == "Tv shows":
+                all_shows_with_query_TV = TVShow.objects.raw('''
+                        SELECT *,lOCATE(%s,titleName)
+                        FROM tvshow_tvshow
+                        WHERE locate(%s,titleName)>0;
+                ''',[search_query, search_query])
+                for i in all_shows_with_query_TV:
+                    print(i, ' hello')
+
+                if all_shows_with_query_TV:
+                    key=True
+                else:
+                    key=False
+                print(search_query)
+                form=search_bar()
+                context = {
+                    'all_shows_with_query_TV': all_shows_with_query_TV,
                     'key':key,
                     'search_query' : search_query,
                     'search_form':form,
