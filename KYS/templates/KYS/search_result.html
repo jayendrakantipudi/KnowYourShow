@@ -152,6 +152,18 @@
     </div>
   {% endfor %}
   {% endif %}
+  {% if all_shows_with_query_TV%}
+  <div class="col-md-12">
+    <h2>Cast</h2>
+  </div>
+  {% for result in all_shows_with_query_TV %}
+      <div class="col-md-3">
+      <a href="{% url 'tvshow:showpage' result.id %}" class="link"><div><img src="/media/{{ result.seriesPoster }}" width="180px" height="250px"></div>
+        <div>{{ result.titleName }}</div>
+      </a><br>
+    </div>
+  {% endfor %}
+  {% endif %}
 </div>
 </div>
 {% else %}
