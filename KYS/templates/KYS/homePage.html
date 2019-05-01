@@ -125,26 +125,26 @@
 <div class="container-fluid">
 <br><br>
 
-  {% for list_name,list in list_of_movies %}
-  {% if list %}
     <div class="row">
         <div class="col-md-12 heading">
-          <h2 style="margin-left: 25px;">{{ list_name }}</h2>
+          <h2 style="margin-left: 25px;">Movies</h2>
         </div>
     </div>
 
     <div class="row">
-        {% for movie in list %}
+        {% for movie in movies %}
         <div class="col-md-2" style="text-align: center;">
           <a href="{% url 'show:movie' movie.id %}" class="link">
-              <img src="/media/{{ movie.titlePoster }}" width="180px" height="250px">
+              <img src="{{ movie.imageLink }}" width="180px" height="250px"><br>
+              <span style="color:black">{{movie.titleName}}</span>
           </a>
+          <br><br>
         </div>
+
         {% endfor %}
 
     </div><br><br><br><br><br>
-    {% endif %}
-{% endfor %}
+
 
 </div>
 {% endblock content %}

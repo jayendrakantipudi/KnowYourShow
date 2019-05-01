@@ -20,14 +20,14 @@ def get_suggested_movies(id):
         WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
         ;
     ''',[id])
-    directors = cast.objects.raw('''
-        SELECT * FROM cast_director
-        WHERE id in (SELECT director_id FROM show_show_director WHERE show_id=%s);
-    ''',[id])
-    producers = cast.objects.raw('''
-        SELECT * FROM cast_producer
-        WHERE id in (SELECT producer_id FROM show_show_producer WHERE show_id=%s);
-    ''',[id])
+    # directors = cast.objects.raw('''
+    #     SELECT * FROM cast_director
+    #     WHERE id in (SELECT director_id FROM show_show_director WHERE show_id=%s);
+    # ''',[id])
+    # producers = cast.objects.raw('''
+    #     SELECT * FROM cast_producer
+    #     WHERE id in (SELECT producer_id FROM show_show_producer WHERE show_id=%s);
+    # ''',[id])
     suggested_movies_genre = Show.objects.raw('''
         SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
         WHERE id in ((SELECT show_id FROM show_show_GENRE WHERE genre_id in (SELECT id FROM show_GENRE WHERE genres in
@@ -35,12 +35,12 @@ def get_suggested_movies(id):
         )));
     ''',[id])
     suggested_movies_lang = Show.objects.raw('''
-        SELECT id,titleName,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
+        SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
         WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages in
         (SELECT languages FROM show_language WHERE id in (SELECT  language_id FROM show_show_language WHERE show_id=%s))
         ))
         ORDER BY suggested_count DESC;
-    ''')
+    ''',[id])
     shows = Show.objects.raw('''
         SELECT * FROM show_show;
     ''')
@@ -51,31 +51,15 @@ def get_suggested_movies(id):
                 SET suggested_count = 0
                 WHERE id=%s;
             ''',[temp.id])
-    for movie_temp in suggested_movies_genre:
-        genres_movie_temp = Show.objects.raw('''
-            SELECT * FROM show_GENRE
-            WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
-            ;
-        ''',[movie_temp.id])
-        count = 0
-        for genre_temp in genres:
-            for temp_genre in genres_movie_temp:
-                if(genre_temp.genres==temp_genre.genres):
-                    count = count + 1
-        with connection.cursor() as cursor:
-            cursor.execute('''
-                UPDATE show_show
-                SET suggested_count = %s
-                WHERE id=%s;
-            ''',[count,movie_temp.id])
-
-
-    for movie_temp in suggested_movies_genre:
+    for movie_temp in suggested_movies_lang:
         lang_movie_temp = Show.objects.raw('''
             SELECT * FROM show_language
             WHERE id in (SELECT language_id FROM show_show_language WHERE show_id=%s);
-            ;
         ''',[movie_temp.id])
+        # for i in lang_movie_temp:
+        #     print(i.languages)
+        #     print()
+        # lang_movie_temp = []
         count = movie_temp.suggested_count
         for lang_temp in langs:
             for temp_lang in lang_movie_temp:
@@ -87,6 +71,30 @@ def get_suggested_movies(id):
                 SET suggested_count = %s
                 WHERE id=%s;
             ''',[count,movie_temp.id])
+
+
+
+    for movie_temp in suggested_movies_genre:
+        genres_movie_temp = Show.objects.raw('''
+            SELECT * FROM show_GENRE
+            WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
+            ;
+        ''',[movie_temp.id])
+        count = movie_temp.suggested_count
+        for genre_temp in genres:
+            for temp_genre in genres_movie_temp:
+                if(genre_temp.genres==temp_genre.genres):
+                    count = count + 1
+        # print(movie_temp.suggested_count)
+        with connection.cursor() as cursor:
+            cursor.execute('''
+                UPDATE show_show
+                SET suggested_count = %s
+                WHERE id=%s;
+            ''',[count,movie_temp.id])
+
+
+
     suggested_movies_lang = Show.objects.raw('''
         SELECT id,titleName,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
         WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages in
@@ -98,6 +106,14 @@ def get_suggested_movies(id):
         SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
         WHERE suggested_count!=0;
     ''')
+    # for i in suggested_movies:
+    #     print(i.titleName)
+    #     print(i.suggested_count)
+    # print()
+    # for i in suggested_movies_genre:
+    #     print(i.suggested_count)
+    print()
+    print()
     return suggested_movies
 
 
@@ -171,12 +187,8 @@ def movie(request,id):
         ;
     ''',[id])
     directors = cast.objects.raw('''
-        SELECT * FROM cast_director
-        WHERE id in (SELECT director_id FROM show_show_director WHERE show_id=%s);
-    ''',[id])
-    producers = cast.objects.raw('''
-        SELECT * FROM cast_producer
-        WHERE id in (SELECT producer_id FROM show_show_producer WHERE show_id=%s);
+        SELECT * FROM cast_directors
+        WHERE id in (SELECT directors_id FROM show_show_director WHERE show_id=%s);
     ''',[id])
     reviews = Show.objects.raw('''
         SELECT *,username FROM show_review,auth_user
@@ -191,6 +203,22 @@ def movie(request,id):
         SELECT *,username FROM show_review,auth_user
         WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id AND show_review.reviewer_id=%s;
     ''',[id,request.user.id])
+    KYS_suggested_movies = Show.objects.raw('''
+        SELECT id,show_id,AVG(rating) AS KYSavg FROM show_review GROUP BY show_id ORDER BY KYSavg DESC;
+    ''')
+    KYS_suggest = []
+    all_movies =  Show.objects.raw('''
+        SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show;
+    ''')
+    for i in KYS_suggested_movies:
+        for j in all_movies:
+            print(i.show_id,j.id)
+            if i.show_id == j.id:
+                KYS_suggest.append(j)
+                break
+    print(KYS_suggest)
+    for i in KYS_suggest:
+        print(i.titleName)
     suggested_movies = get_suggested_movies(id)
     # suggested_movies = []
     # for i in suggested_movies_genre:
@@ -213,10 +241,10 @@ def movie(request,id):
             'reviews':reviews,
             'Directors':directors,
             'total_reviews':len(reviews),
-            'Producers':producers,
             'user_rated':user_rated,
             'RATING_INFO': RATING_INFO,
             'KYSrating':total_rating,
+            'KYS_suggested_movies':KYS_suggest,
             'suggested_movies':suggested_movies,
         }
     else:
@@ -229,12 +257,12 @@ def movie(request,id):
             'Languages':langs,
             'reviews':reviews,
             'Directors':directors,
-            'Producers':producers,
             'user_rated':user_rated,
             'total_reviews':len(reviews),
             'currentUser_review':currentUser_review[0],
             'RATING_INFO': RATING_INFO,
             'KYSrating': total_rating,
+            'KYS_suggested_movies':KYS_suggest,
             'suggested_movies':suggested_movies,
         }
     return render(request,'show/movie.html',context)
@@ -316,12 +344,8 @@ def review_rate(request,id):
         ;
     ''',[id])
     directors = cast.objects.raw('''
-        SELECT * FROM cast_director
-        WHERE id in (SELECT director_id FROM show_show_director WHERE show_id=%s);
-    ''',[id])
-    producers = cast.objects.raw('''
-        SELECT * FROM cast_producer
-        WHERE id in (SELECT producer_id FROM show_show_producer WHERE show_id=%s);
+        SELECT * FROM cast_directors
+        WHERE id in (SELECT directors_id FROM show_show_director WHERE show_id=%s);
     ''',[id])
     reviews = Show.objects.raw('''
         SELECT *,username FROM show_review,auth_user
@@ -356,6 +380,11 @@ def review_rate(request,id):
                 WHERE id=%s;
             ''',[count,movie_temp.id])
         print(movie_temp.titleName,count)
+    KYS_suggested_movies = Show.objects.raw('''
+        SELECT *,EXTRACT(YEAR FROM releaseDate) as year FROM show_show
+        WHERE id in (SELECT show_id FROM show_review)
+        ;
+    ''')
     suggested_movies = Show.objects.raw('''
         SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
         WHERE id in (SELECT show_id FROM show_show_GENRE WHERE genre_id in (SELECT id FROM show_GENRE WHERE genres in
@@ -372,8 +401,8 @@ def review_rate(request,id):
             'Languages':langs,
             'reviews':reviews,
             'Directors':directors,
-            'Producers':producers,
             'user_rated':user_rated,
+            'KYS_suggested_movies':KYS_suggested_movies,
             'RATING_INFO': False,
             'suggested_movies':suggested_movies,
         }
@@ -387,12 +416,12 @@ def review_rate(request,id):
             'Languages':langs,
             'reviews':reviews,
             'Directors':directors,
-            'Producers':producers,
             'user_rated':user_rated,
             'currentUser_review':currentUser_review[0],
             'total_reviews':avgRating[0].total,
             'RATING_INFO': True,
             'KYSrating': total_rating,
+            'KYS_suggested_movies':KYS_suggested_movies,
             'user_review':currentUser_review[0],
             'suggested_movies':suggested_movies,
         }

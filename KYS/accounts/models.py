@@ -8,3 +8,6 @@ class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True)
 	age  = models.IntegerField(null=True)
 	# profilePic = models.ImageField(null=True, blank=True)
+	class Meta:
+		indexes = [(models.Index(fields=['age'])),
+		]

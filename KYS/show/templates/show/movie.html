@@ -3,26 +3,23 @@
 {% load widget_tweaks %}
 {% block content %}
 <br><br>
-<div class="container-fluid background-container" style="margin-left:50px;">
+<div class="container-fluid background-container" style="margin-left:50px;border">
   <div class="row">
     <div class="col-md-8">
+    <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8 heading">
+      <div class="col-md-10 heading">
         <h1>{{show.titleName}}&nbsp({{show.year}})</h1>
       </div>
 
     </div><br>
     <div class="row">
-      <div class="col-md-7"><img src="/media/{{show.titlePoster}}" width="500px" height="300px"></div>
-      <div class="col-md-3">
+      <div class="col-md-5"><img src="{{show.imageLink}}" width="200px" height="300px"></div>
+      <div class="col-md-5">
         <b style="color:deepskyblue;">Directed By</b> :
         {% for director in Directors %}
-          <a href="{% url 'cast:Director' director.id %}">{{director.name}}</a>&nbsp
+          <a href="{% url 'cast:cast_details' director.id %}">{{director.name}}</a>&nbsp
         {% endfor %}<br>
-        <b style="color:deepskyblue;">Produced By</b> :
-        {% for producer in Producers %}
-          <a href="{% url 'cast:Producer' producer.id %}">{{producer.name}}</a>&nbsp
-        {% endfor %}  <br>
         <b style="color:deepskyblue;">Release Date</b> :   {{show.releaseDate}}<br>
         <b style="color:deepskyblue;">Budget</b> : Rs. {{show.budget}} Cr<br>
         <b style="color:deepskyblue;">Collection</b> :Rs. {{show.BoxOfficeCollection}} Cr<br>
@@ -44,7 +41,7 @@
     </div><br>
     <div class="row">
       <div class="col-md-8" id="b">
-          <b style="color:deepskyblue;">Movie Plot</b> : {{show.storyLine}}
+          <b style="color:deepskyblue;">Story Line  </b> : {{show.storyLine}}
       </div><a href='javascript:;' id="c" onclick="reveal()">see more</a>
     </div> <a href="javascript:;" id="d" onclick="showless()" style="display:none">See less</a><br><br><br>
     <div class="row">
@@ -78,7 +75,7 @@
       </div>
     </div><br>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-5">
         <b  style="color:deepskyblue;">KYS Rating</b> : {% if RATING_INFO %}<b>{{KYSrating}}</b>/5({{total_reviews}}){% else %}<b>Not Rated Yet</b>  {% endif %}
       </div>
     </div><br>
@@ -113,11 +110,24 @@
       {% endif %}
     {% endfor %}
     </div>
+    </div>
     <div class="col-md-3">
       <div class="row heading1">
         <h4>Recommended Movies</h4>
       </div>
       {% for movie in suggested_movies %}
+      {% if show.id is not movie.id %}
+      <div class="row">
+        <div class="col-md-9">
+          <a href="{% url 'show:movie' movie.id %}"><span style="font-size:18px;">{{ movie.titleName }}({{ movie.year }})</span></a>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}<br><br><br>
+      <div class="row heading1">
+        <h4>Top KYS Rated Movies</h4>
+      </div>
+      {% for movie in KYS_suggested_movies %}
       {% if show.id is not movie.id %}
       <div class="row">
         <div class="col-md-9">
