@@ -1,5 +1,5 @@
 from django.db import models
-from cast.models import cast, director, producer, directors
+from cast.models import cast, director, producer, directors, actors
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils.timezone import now
@@ -40,7 +40,7 @@ class Show(models.Model):
 	GENRE = models.ManyToManyField(GENRE)
 	# GENRE = models.ForeignKey(GENRE,on_delete=models.SET_NULL,null=True,blank=True)
 	imageLink = models.CharField(max_length=2500)
-	cast = models.ManyToManyField(cast)
+	cast = models.ManyToManyField(actors)
 	movieViewCount = models.IntegerField(default= 0)
 	def __str__(self):
 		return self.titleName

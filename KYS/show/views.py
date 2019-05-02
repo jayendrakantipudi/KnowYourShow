@@ -114,7 +114,7 @@ def get_suggested_movies(id):
     #     print(i.suggested_count)
     print()
     print()
-    return suggested_movies
+    return suggested_movies_genre
 
 
 def movie(request,id):
@@ -172,8 +172,8 @@ def movie(request,id):
     ''',[id,])
     form = search_bar()
     castActed = Show.objects.raw('''
-        SELECT * FROM cast_cast
-        WHERE id in (SELECT cast_id FROM show_show_cast WHERE show_id=%s);
+        SELECT * FROM cast_actors
+        WHERE id in (SELECT actors_id FROM show_show_cast WHERE show_id=%s);
         ;
     ''',[id])
     langs = Show.objects.raw('''
@@ -341,8 +341,8 @@ def review_rate(request,id):
         user_rated = False
 
     castActed = Show.objects.raw('''
-        SELECT * FROM cast_cast
-        WHERE id in (SELECT cast_id FROM show_show_cast WHERE show_id=%s);
+        SELECT * FROM cast_actors
+        WHERE id in (SELECT actors_id FROM show_show_cast WHERE show_id=%s);
         ;
     ''',[id])
     langs = Show.objects.raw('''
@@ -373,37 +373,30 @@ def review_rate(request,id):
         SELECT *,username FROM show_review,auth_user
         WHERE show_review.show_id = %s AND show_review.reviewer_id = auth_user.id AND show_review.reviewer_id=%s;
     ''',[id,request.user.id])
-    # 
-    # for movie_temp in suggested_movies:
-    #     genres_movie_temp = Show.objects.raw('''
-    #         SELECT * FROM show_GENRE
-    #         WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s);
-    #         ;
-    #     ''',[movie_temp.id])
-    #     count = 0
-    #     for genre_temp in genres:
-    #         for temp_genre in genres_movie_temp:
-    #             if(genre_temp.genres==temp_genre.genres):
-    #                 count = count + 1
-    #     with connection.cursor() as cursor:
-    #         cursor.execute('''
-    #             UPDATE show_show
-    #             SET suggested_count = %s
-    #             WHERE id=%s;
-    #         ''',[count,movie_temp.id])
-    #     print(movie_temp.titleName,count)
     KYS_suggested_movies = Show.objects.raw('''
-        SELECT *,EXTRACT(YEAR FROM releaseDate) as year FROM show_show
-        WHERE id in (SELECT show_id FROM show_review)
-        ;
+        SELECT id,show_id,AVG(rating) AS KYSavg FROM show_review GROUP BY show_id ORDER BY KYSavg DESC;
     ''')
-    suggested_movies = Show.objects.raw('''
-        SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
-        WHERE id in (SELECT show_id FROM show_show_GENRE WHERE genre_id in (SELECT id FROM show_GENRE WHERE genres in
-        (SELECT genres   FROM show_GENRE WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s))
-        ))
-        ORDER BY suggested_count DESC;
-    ''',[id])
+    KYS_suggest = []
+    all_movies =  Show.objects.raw('''
+        SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show;
+    ''')
+    for i in KYS_suggested_movies:
+        for j in all_movies:
+            print(i.show_id,j.id)
+            if i.show_id == j.id:
+                KYS_suggest.append(j)
+                break
+    print(KYS_suggest)
+    for i in KYS_suggest:
+        print(i.titleName)
+    suggested_movies = get_suggested_movies(id)
+    # suggested_movies = Show.objects.raw('''
+    #     SELECT *,EXTRACT(YEAR FROM releaseDate) AS year FROM show_show
+    #     WHERE id in (SELECT show_id FROM show_show_GENRE WHERE genre_id in (SELECT id FROM show_GENRE WHERE genres in
+    #     (SELECT genres   FROM show_GENRE WHERE id in (SELECT  genre_id FROM show_show_GENRE WHERE show_id=%s))
+    #     ))
+    #     ORDER BY suggested_count DESC;
+    # ''',[id])
     if not currentUser_review:
         context = {
             'show':movies[0],
@@ -493,8 +486,9 @@ def update_show(request,movieID):
 
 def user_review(request):
     user_reviews = Show.objects.raw('''
-        SELECT * FROM show_review
-        WHERE reviewer_id=%s;
+        SELECT *,show_id as MovieID FROM show_show as S,show_review as R
+        WHERE R.show_id=S.id
+        AND R.reviewer_id=%s;
     ''',[request.user.id])
     context = {
         'user_reviews':user_reviews,

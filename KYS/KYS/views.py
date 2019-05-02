@@ -3,7 +3,7 @@ from django.db import connection
 from .forms import search_bar
 from show.models import Show,GENRE,review,language
 from cast.models import cast
-from cast.models import directors as D
+from cast.models import directors as D, actors as A
 from tvshow.models import TVShow as T, Season as S, Episode as E
 from django.shortcuts import redirect
 import csv
@@ -186,9 +186,6 @@ def insert_data():
             link=article.find('div',class_='image').a['href']
             titleName = title[1:len(title)-7]
             print(titleName)
-            print()
-            print()
-
             genres = genre
             temp_genres = GENRE.objects.all()
             GENRES = []
@@ -236,8 +233,25 @@ def insert_data():
                     D.objects.create(name=dir)
                     break
                 break
-                    # D.save()
-            # counter = counter+1
+            ACTORS = []
+            Actors = Directors[1:]
+            acts = A.objects.all()
+            for act in Actors:
+                key_actor = False
+                for i in acts:
+                    if i.name == act:
+                        key_actor = True
+                if not key_actor:
+                    A.objects.create(name=act)
+            acts = A.objects.all()
+            print(acts)
+            for act in Actors:
+                print(act)
+                for i in acts:
+                    if i.name == act:
+                        print(act)
+                        ACTORS.append(i)
+
 
             imageLink = image
             titlePoster1 = link
@@ -310,15 +324,16 @@ def insert_data():
             temp_dirs = D.objects.all()
             for dir in range(0,len(Directors)):
                 for i in temp_dirs:
-                    print(dir,end="")
-                    print(Directors[dir] + "----" + i.name,end=" ")
+                    # print(dir,end="")
+                    # print(Directors[dir] + "----" + i.name,end=" ")
                     if i.name == Directors[dir]:
-                        print("hello")
+                        # print("hello")
                         DIRECTORS.append(i)
                     print()
             print("GENRES",GENRES)
             print("DIRECTORS",DIRECTORS)
             print("LANGUAGES",LANGUAGES)
+            print("Actors",ACTORS)
             bud = random.randint(500,1500)
             bud = round(float(bud/11),2)
             boc = random.randint(1500,2000)
@@ -336,6 +351,8 @@ def insert_data():
                     instance.language.add(i)
                 for i in GENRES:
                     instance.GENRE.add(i)
+                for i in ACTORS:
+                    instance.cast.add(i)
 
             # instance.cast.add(GENRES)
             # break
@@ -357,7 +374,9 @@ def mainpage(request):
         WHERE id in (SELECT show_id FROM show_show_language WHERE language_id in (SELECT id FROM show_language WHERE languages="Telugu"));
         ;
     ''')
-
+    tvshows = T.objects.raw('''
+        SELECT * FROM tvshow_tvshow;
+    ''')
     list_of_movies.append(["Telugu Movies", movies_telugu])
     movies_english = Show.objects.raw('''
         SELECT * FROM show_show
@@ -430,6 +449,7 @@ def mainpage(request):
         # 'movies_horror':movies_horror,
         'search_form':form,
         'list_of_movies':list_of_movies,
+        'tvshows':tvshows,
     }
 
     return render(request,'KYS/homePage.html',context)
@@ -482,7 +502,7 @@ def search(request):
             elif search_ty == 'Cast':
                 all_shows_with_query = cast.objects.raw('''
                                SELECT *, LOCATE(%s,name)
-                               FROM cast_cast
+                               FROM cast_actors
                                WHERE locate(%s,name)>0;
                    ''', [search_query, search_query])
 

@@ -19,18 +19,6 @@
              {% endfor %}
            </ul>
     </div>
-    <div class="col-md-10 heading">
-      <h3>Episodes</h3>
-    </div>
-    </div><br>
-    <div class="row">
-    {%for episode in episodes%}
-    <div class="col-md-2 cast" style="text-align:center;">
-      <a href="{% url 'tvshow:episodepage' episode.series_id episode.season_id episode.episodeNum %}" class="link"><img src="/media/{{ episode.episodePoster }}" width="180px" height="250px"></a><br>
-      <a href="" class="link"></a>
-    </div>
-    {% endfor %}
-    </div><br><br>
 
   </div><br>
 

@@ -51,7 +51,11 @@ class director(models.Model):
 	def __str__(self):
 		return self.name
 
+class actors(models.Model):
+	name = models.CharField(max_length=120)
 
+	def __str__(self):
+		return self.name
 
 class producer(models.Model):
 	GENDER = (

@@ -8,6 +8,10 @@
   text-decoration: none;
 }
 
+.btn1{
+  width: 50%;
+}
+
 
 .field_name{
   color:white;
@@ -52,7 +56,9 @@
     color: deepskyblue;
     text-decoration: none;
   }
-
+input{
+  width:100%;
+}
 
 .button {
   border: 1px solid deepskyblue;

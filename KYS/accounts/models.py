@@ -10,7 +10,7 @@ class Profile(models.Model):
 	# dob  = models.DateField(null=True,max_length=8)
 	phone = models.CharField(null=True,blank=True,max_length=20)
 	age = models.IntegerField(null=True)
-	# profilePic = models.ImageField(null=True, blank=True)
+	# profilePic = models.ImageField(upload_to='series_posters', blank=True)
 	class Meta:
 		indexes = [(models.Index(fields=['age'])),
 		]

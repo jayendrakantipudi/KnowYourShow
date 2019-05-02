@@ -83,7 +83,34 @@ def activate(request, uidb64, token):
 
 
 def profile(request):
-    profile_temp = get_object_or_404(User,id=request.user.id)
+    profile_temp = get_object_or_404(Profile,user=request.user)
+    profile = profile_temp
+    print(profile_temp)
+    context = {
+    'profile':profile,
+    }
+    return render(request,'accounts/profile.html',context)
+
+
+def edit_profile(request):
+    if request.method == "POST":
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        with connection.cursor() as cursor:
+            cursor.execute('''
+                UPDATE auth_user
+                SET first_name = %s,last_name = %s,email=%s
+                WHERE id = %s;
+            ''',[fname,lname,email,request.user.id])
+        with connection.cursor() as cursor:
+            cursor.execute('''
+                UPDATE accounts_profile
+                SET phone = %s
+                WHERE id = %s;
+            ''',[phone,request.user.id])
+    profile_temp = get_object_or_404(Profile,user=request.user)
     profile = profile_temp
     print(profile_temp)
     context = {

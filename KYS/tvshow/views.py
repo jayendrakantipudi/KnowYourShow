@@ -43,7 +43,7 @@ def tvshowpage(request, id):
         cursor.execute('''
             UPDATE tvshow_tvshow
             SET seriesViewCount = seriesViewCount + 1
-            WHERE series_id = %s;
+            WHERE id = %s;
         ''',[id])
     return render(request, 'tvshow/tvshow_page.html', context)
 
@@ -51,9 +51,10 @@ def tvshowpage(request, id):
 def seasonpage(request, series_id, season_id):
     episodes = TVShow.objects.raw('''
             SELECT * FROM tvshow_episode
-            WHERE id in (SELECT id FROM tvshow_episode WHERE series_id=%s AND season_id=%s)
-            ;
+            WHERE series_id=%s AND season_id=%s;
     ''', [series_id, season_id])
+    for i in episodes:
+        print(i.episodePoster)
     tvshow = TVShow.objects.raw('''
             SELECT * FROM tvshow_tvshow
             WHERE id =%s;

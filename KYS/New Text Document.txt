@@ -5,7 +5,7 @@ import wikipedia
 	SELECT id FROM show_show
 	ORDER BY movieViewCount DESC LIMIT 5
 
-Name 
+Name
  = wptools.page('Rami Malek').get_parse().data['infobox']['name']
 
 Birth Name
@@ -62,7 +62,7 @@ CREATE TABLE top5_movies (
 
 
 DELIMITER $$
-CREATE TRIGGER update_top_movies 
+CREATE TRIGGER update_top_movies
 	BEFORE UPDATE ON show_show
 	FOR EACH ROW
 BEGIN
@@ -72,11 +72,11 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE update_series_count(INOUT series_id INT(4))
+CREATE PROCEDURE update_series_count(INOUT S INT(4))
 BEGIN
 	UPDATE tvshow_tvshow
 	SET seriesViewCount = seriesViewCount + 1
-	WHERE id = series_id;
+	WHERE id = S;
 END $$
 DELIMITER ;
 
@@ -88,7 +88,7 @@ CREATE TABLE top5_series (
 );
 
 DELIMITER $$
-CREATE TRIGGER update_top_series 
+CREATE TRIGGER update_top_series
 	BEFORE UPDATE ON tvshow_tvshow
 	FOR EACH ROW
 BEGIN
@@ -96,4 +96,3 @@ BEGIN
 	SET Rankid = id;
 END$$
 DELIMITER ;
-

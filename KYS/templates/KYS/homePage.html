@@ -143,11 +143,26 @@
         {% endfor %}
 
     </div><br><br><br><br><br>
+    <div class="row">
+        <div class="col-md-12 heading">
+          <h2 style="margin-left: 25px;">TV Shows</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% for tvshow in tvshows %}
+        <div class="col-md-2" style="text-align: center;">
+          <a href="{% url 'tvshow:showpage' tvshow.id %}" class="link">
+              <img src="{{ tvshow.seriesPoster }}" width="180px" height="250px"><br>
+              <span style="color:black">{{tvshow.titleName}}</span>
+          </a>
+          <br><br>
+        </div>
+        {% endfor %}
 
+    </div><br><br><br><br><br>
 
 </div>
 {% endblock content %}
-
 
 
 

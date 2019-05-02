@@ -288,7 +288,7 @@ def cast_details(request,id):
         if occupation[0] == 'hlist':
             occupation.remove('hlist')
     except:
-        occupation=None
+        occupation = None
     try:
         Photo = cast_data.data['image'][0]['url']
     except:
@@ -300,6 +300,77 @@ def cast_details(request,id):
     Biography= wikipedia.page(name).summary
 
     details = {
+        'name':name,
+        'BirthName':BirthName,
+        'dob':dob,
+        'placeofbirth':placeofbirth,
+        'Education':Education,
+        'Photo':Photo,
+        'Yearsactive':Yearsactive,
+        'Biography':Biography,
+    }
+    return render(request,'cast/crew.html',details)
+
+def CAST(request,id):
+    Name = cast.objects.raw('''
+        SELECT * FROM cast_actors
+        WHERE id = %s;
+    ''',[id])
+    name = Name[0].name
+
+    cast_data = wptools.page(name).get_parse()
+    infobox = cast_data.data['infobox']
+    try:
+        BirthName = infobox['birth_name']
+    except:
+        BirthName = None
+    try:
+        a = re.split('[{{ | }}]' , infobox['birth_date'])
+        dob = []
+        for i in a:
+            try:
+                dob.append(int(i))
+            except:
+                pass
+    except:
+        dob = None
+    try:
+        s = infobox['birth_place']
+        placeofbirth = ''.join(i for i in s if i not in [ '[' , ']' ])
+    except:
+        placeofbirth = None
+    try:
+        s1= infobox['education']
+        Education = ''.join(i for i in s1 if i not in [ '[' , ']', '(', ')' ])
+    except:
+        try:
+            s1= infobox['alma_mater']
+            Education = ''.join(i for i in s1 if i not in [ '[' , ']', '(', ')' ])
+        except:
+            Education = None
+    try:
+        s1= infobox['occupation']
+        s2 = ''.join(i for i in s1 if i not in [ '[' , ']', '(', ')', '{', '}' ])
+        s2 = re.split('[\n* , |]', s2)
+        occupation = [x for x in s2 if x != '']
+        if occupation[0] == 'flatlist':
+            occupation.remove('flatlist')
+        if occupation[0] == 'hlist':
+            occupation.remove('hlist')
+    except:
+        occupation = None
+    try:
+        Photo = cast_data.data['image'][0]['url']
+    except:
+        Photo = None
+    try:
+        Yearsactive = infobox['years_active']
+    except:
+        Yearsactive = None
+    Biography= wikipedia.page(name).summary
+
+    details = {
+        'name':name,
         'BirthName':BirthName,
         'dob':dob,
         'placeofbirth':placeofbirth,

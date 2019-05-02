@@ -6,7 +6,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 heading">
-      <h1>{{BirthName}}</h1>
+      <h1>{% if BirthName is not None %}{{BirthName}}{% else %}{{name}}{% endif %}</h1>
     </div>
 <hr>
   </div><br>
@@ -20,7 +20,7 @@
   </div><br><br>
   <div class="row">
     <div class="col-md-12 heading">
-      <h3>{% if key %}Movies Directed{% else %}Movies Produced{% endif %}</h3>
+      <h3>Movies Directed</h3>
     </div>
   </div><br>
   <div class="row">
@@ -41,7 +41,7 @@
   <div class="row">
     <div class="col-md-9">
       <b style="color:deepskyblue;">Born </b> :   {{dob}} <b style="color:deepskyblue;">in</b> {{placeofbirth}} <br><br>
-      <b style="color:deepskyblue;">Biography</b> : {{Biography}}<br>
+      <b style="color:deepskyblue;">Biography</b> : {{Biography}}<br><br>
       <b style="color:deepskyblue;">Education</b> : {{Education}}<br>
     </div>
   </div>
